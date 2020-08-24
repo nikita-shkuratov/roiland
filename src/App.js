@@ -1,9 +1,13 @@
 import React from 'react'
+import Header from './components/Header/Header'
 
-function App() {
+function App({children}) {
   return (
-    <div className="App">
-      <h1>hello</h1>
+    <div className="wrapper">
+       <main className="page">
+      <Header />
+      {children}
+      </main>
     </div>
   )
 }
