@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux'
-import { fetchDataReducer } from './fetchDataReducer'
+import { fetchListReducer } from './fetchListReducer'
+import { fetchListForPageReducer } from './fetchListForPageReducer'
 
 export const rootReducer = combineReducers({
-    fetchData: fetchDataReducer
+    list: fetchListReducer,
+    listForPage: fetchListForPageReducer
 })

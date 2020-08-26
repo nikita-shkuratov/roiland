@@ -7,7 +7,6 @@ function DataList(props) {
     const episodeData = (<p>episode: {episode} / air_date: {air_date}</p>)
     const locationData = (<p>type: {type} / dimension: {dimension}</p>)
 
-    console.log(gender)
     return (
         <li className='content__item'>
             <div className='content__container'>

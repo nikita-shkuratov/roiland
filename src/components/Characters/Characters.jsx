@@ -1,15 +1,17 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { fethCharacters } from '../../redux/actions/actions'
+import { URL_GET_CHARACTERS } from '../../redux/types'
 import DataList from '../DataList/DataList'
 
 function Characters() {
     const dispatch = useDispatch()
-    const charactersList = useSelector(state => state.fetchData.fethedCharacters)
+    const charactersList = useSelector(state => state.list.fethedCharacters)
 
     useEffect(() => {
-        dispatch(fethCharacters())
+        dispatch(fethCharacters(URL_GET_CHARACTERS))
     }, [dispatch])
 
     const { results } = charactersList
@@ -20,7 +22,10 @@ function Characters() {
                 {
                     charactersList.length === 0
                         ? <p>Loading...</p>
-                        : <ul>{results.map(item => <DataList key={item.id} data={item} />)}</ul>
+                        : <ul>{results.map(item =>
+                            <Link to={`/character/${item.id}`} key={item.id}>
+                                <DataList data={item} />
+                            </Link>)}</ul>
                 }
             </div>
         </section>

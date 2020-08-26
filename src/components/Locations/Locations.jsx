@@ -1,15 +1,17 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
-import { fethedLocations } from '../../redux/actions/actions'
 import DataList from '../DataList/DataList'
+import { URL_GET_LOCATIONS } from '../../redux/types'
+import { fethLocations } from '../../redux/actions/actions'
+import { Link } from 'react-router-dom'
 
 function Locations() {
     const dispatch = useDispatch()
-    const locationsList = useSelector(state => state.fetchData.fethedLocations)
+    const locationsList = useSelector(state => state.list.fethedLocations)
 
     useEffect(() => {
-        dispatch(fethedLocations())
+        dispatch(fethLocations(URL_GET_LOCATIONS))
     }, [dispatch])
 
     const { results } = locationsList
@@ -20,7 +22,10 @@ function Locations() {
                 {
                     locationsList.length === 0
                         ? <p>Loading...</p>
-                        : <ul>{results.map(item => <DataList key={item.id} data={item} />)}</ul>
+                        : <ul>{results.map(item =>
+                            <Link to={`/location/${item.id}`} key={item.id}>
+                                <DataList data={item} />
+                            </Link>)}</ul>
                 }
             </div>
         </section>

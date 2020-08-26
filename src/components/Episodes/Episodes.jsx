@@ -1,15 +1,17 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
-import { fethedEpisodes } from '../../redux/actions/actions'
+import { Link } from 'react-router-dom'
+import { URL_GET_EPISODES } from '../../redux/types'
 import DataList from '../DataList/DataList'
+import { fethEpisodes } from '../../redux/actions/actions'
 
 function Episodes() {
     const dispatch = useDispatch()
-    const episodesList = useSelector(state => state.fetchData.fethedEpisodes)
+    const episodesList = useSelector(state => state.list.fethedEpisodes)
 
     useEffect(() => {
-        dispatch(fethedEpisodes())
+        dispatch(fethEpisodes(URL_GET_EPISODES))
     }, [dispatch])
 
     const { results } = episodesList
@@ -20,7 +22,10 @@ function Episodes() {
                 {
                     episodesList.length === 0
                         ? <p>Loading...</p>
-                        : <ul>{results.map(item => <DataList key={item.id} data={item} />)}</ul>
+                        : <ul>{results.map(item =>
+                            <Link to={`/episode/${item.id}`} key={item.id}>
+                                <DataList data={item} />
+                            </Link>)}</ul>
                 }
             </div>
         </section>
@@ -28,3 +33,5 @@ function Episodes() {
 }
 
 export default Episodes
+
+

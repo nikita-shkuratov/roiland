@@ -6,7 +6,7 @@ const initialState = {
     fethedLocations: []
 }
 
-export const fetchDataReducer = (state = initialState, action) => {
+export const fetchListReducer = (state = initialState, action) => {
     switch (action.type) {
         case FETCH_CHARACTERS:
             return { ...state, fethedCharacters: action.payload }
