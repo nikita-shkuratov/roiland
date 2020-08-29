@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { fethCharacters } from '../../redux/actions/actions'
-import { URL_GET_CHARACTERS } from '../../redux/types'
+import { URL_GET_CHARACTERS } from '../../apiUrls'
 import DataList from '../DataList/DataList'
 
 function Characters() {

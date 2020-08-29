@@ -2,7 +2,7 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import DataList from '../DataList/DataList'
-import { URL_GET_LOCATIONS } from '../../redux/types'
+import { URL_GET_LOCATIONS } from '../../apiUrls'
 import { fethLocations } from '../../redux/actions/actions'
 import { Link } from 'react-router-dom'
 

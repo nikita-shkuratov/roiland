@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { URL_GET_EPISODES } from '../../../redux/types'
+import { URL_GET_EPISODES } from '../../../apiUrls'
 import { useEffect } from 'react'
 import { fethEpisodesCharacter } from '../../../redux/actions/actions'
 
@@ -20,7 +20,7 @@ function CharacterPage(props) {
 
     useEffect(() => {
         dispatch(fethEpisodesCharacter(getUrlEpizodes))
-    }, [])
+    }, [dispatch, getUrlEpizodes])
 
     const arrayEpisodesList = Array.isArray(episodesList)
         ? episodesList
@@ -29,18 +29,34 @@ function CharacterPage(props) {
     return (
         <section className='content'>
             <div className='content__block'>
-                <p>{`name - ${name} / status - ${status} / origin - ${origin.name} / species - ${species}`}</p>
-                <p>{`gender - ${gender}   /  `}</p>
-                <img src={image} alt='' />
+                <div className='caracter'>
+                    <div className='character__img'>
+                        <img className='avatar' src={image} alt='' />
+                    </div>
+                    <div className='character__info'>
+                        <p>{`NAME : ${name}`}</p>
+                        <p>{`GENDER : ${gender}`}</p>
+                        <p>{`SPECIES : ${species}`}</p>
+                        <p>{`ORIGIN : ${origin.name}`}</p>
+                        <p>{`STATUS : ${status}`}</p>
+                    </div>
+                </div>
+                <div className='character__list'>
+                    <h1 className='character__list__title'>
+                        List of episodes with this character
+                        </h1><hr />
+                    {arrayEpisodesList.length === 0
+                        ? <p>Loading...</p>
+                        : <ul >
+                            {arrayEpisodesList.map((item, index) =>
+                                <li className='character__list__item' key={index}>
+                                    {<div className='item_info'> <p>{item.episode}</p><p>{item.name}</p></div>}
+                                </li>)}
+                        </ul>}
+                </div>
             </div>
-            {arrayEpisodesList === 0
-                ? <p>Loading...</p>
-                : <ul>
-                    {arrayEpisodesList.map((item, index) => <li key={index}>{`${item.name}  ${item.episode}`}</li>)}
-                </ul>}
         </section>
     )
 }
 
 export default CharacterPage
-

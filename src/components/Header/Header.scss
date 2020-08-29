@@ -3,13 +3,13 @@
     width: 100%;
     z-index: 50;
     left: 0;
-    top: 0px;
+    top: 10px;
 
     &__row {
         @include flexbox();
         justify-content: center;
         align-items: center;
-        height: 85px;
+        height: 50px;
     }
 
     @media (max-width: 767px) {
@@ -22,27 +22,49 @@
         @include flexbox();
         li {
             position: relative;
-            padding: 0px 30px;
+            padding: 0px 45px;
+
+            &:after {
+                content: "";
+                width: 4px;
+                height: 4px;
+                background-color: #4d4959;
+                border-radius: 50%;
+                position: absolute;
+                right: 0;
+                top: 50%;
+                margin: -1.5px 0px 0px 0px;
+            }
+            &:nth-child(3),
+            &:last-child {
+                &:after {
+                    display: none;
+                }
+            }
         }
     }
+
     &__link {
-        color: #4d4959;
+        color: #807d8a;
         font-size: 16px;
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 2.6px;
+        &:hover{
+            color:rgb(190, 188, 188);
+        }
         &.active{
-            color: #ff0000;
+            color:rgb(5, 5, 5);
         }
     }
+
     @media (max-width: 767px) {
         &__body {
-            position: absolute;
+            position: fixed;
             height: 100%;
             width: 100%;
             top: 0;
             left: 0;
-            overflow: auto;
             background-color: #4d4959;
             padding: 150px 0px 20px 0px;
             @include tr(0, -100%, 0);
@@ -51,17 +73,17 @@
                 @include tr(0px, 0px, 0px);
             }
         }
+        
         &__list {
             flex-direction: column;
             justify-content: center;
             align-items: center;
             li {
                 padding: 0px 0px 45px 0px;
-                &:nth-child(2),
                 &:nth-child(3) {
                     padding: 0px 0px 45px 0px;
                     &:after {
-                        display: block;
+                        display: none;
                     }
                 }
                 &:last-child {
@@ -89,7 +111,7 @@
     @media (max-width: 767px) {
         display: block;
         position: absolute;
-        top: 33px;
+        top: 10px;
         right: 15px;
         width: 30px;
         height: 18px;
