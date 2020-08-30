@@ -1,17 +1,18 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
-import DataList from '../DataList/DataList'
-import { URL_GET_LOCATIONS } from '../../apiUrls'
-import { fethLocations } from '../../redux/actions/actions'
+import { fethLocations } from '../../redux/actions/actionsList'
 import { Link } from 'react-router-dom'
+import { PATH_LOCATION } from '../../constRotePath'
+import DataList from '../DataList/DataList'
+import Loader from '../Loader/Loader'
 
 function Locations() {
     const dispatch = useDispatch()
     const locationsList = useSelector(state => state.list.fethedLocations)
 
     useEffect(() => {
-        dispatch(fethLocations(URL_GET_LOCATIONS))
+        dispatch(fethLocations())
     }, [dispatch])
 
     const { results } = locationsList
@@ -19,13 +20,13 @@ function Locations() {
     return (
         <section className='content'>
             <div className='content__block'>
-                {
-                    locationsList.length === 0
-                        ? <p>Loading...</p>
-                        : <ul>{results.map(item =>
-                            <Link to={`/location/${item.id}`} key={item.id}>
-                                <DataList data={item} />
-                            </Link>)}</ul>
+                {!results
+                    ? <Loader />
+                    : <ul>{results.map(item =>
+                        <Link to={`${PATH_LOCATION}${item.id}`} key={item.id}>
+                            <DataList data={item} />
+                        </Link>)}
+                    </ul>
                 }
             </div>
         </section>

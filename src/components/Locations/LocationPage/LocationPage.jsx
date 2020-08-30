@@ -1,53 +1,63 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { useEffect } from 'react';
-import { URL_GET_CHARACTERS } from '../../../apiUrls'
-import { fethCharactersLocation } from '../../../redux/actions/actions'
+import { fethCharactersLocation } from '../../../redux/actions/actionsListForPage'
+import { Link, useRouteMatch } from 'react-router-dom'
+import { PATH_CHARACTER } from '../../../constRotePath'
+import { findLocation } from '../../../redux/actions/actionsFind'
 import locationIco from '../../../style/img/location-ico.png'
+import DataList from '../../DataList/DataList'
+import Loader from '../../Loader/Loader'
 
-function LocationPage(props) {
+function LocationPage() {
     const dispatch = useDispatch()
-
-    const locationsList = useSelector(state => state.list.fethedLocations)
-    const charactersList = useSelector(state => state.listForPage.charactersForLocation)
-
-    const getIdLocation = props.match.params.id || '';
-    const findLocation = locationsList.results.find(item => item.id === Number(getIdLocation))
-
-    const { name, type, residents } = findLocation
-
-    const allCharacters = residents.map(item => item.slice(42)).join()
-    let getUrlcharacters = `${URL_GET_CHARACTERS}${allCharacters}`
+    const { params: { id: episodId } } = useRouteMatch()
 
     useEffect(() => {
-        dispatch(fethCharactersLocation(getUrlcharacters))
-    }, [dispatch, getUrlcharacters])
+        dispatch(findLocation(episodId))
+    }, [dispatch, episodId])
 
-    const arrayCharactersList = Array.isArray(charactersList)
-        ? charactersList
-        : [charactersList]
+    const thisLocation = useSelector(state => state.findLoc.findLocation)
+    const charactersList = useSelector(state => state.charForLoc.charactersForLocation)
+
+    const { name, type, residents } = thisLocation
+    const allCharacters = thisLocation.length ? residents.map(item => item.slice(42)).join() : ''
+
+    useEffect(() => {
+        dispatch(fethCharactersLocation(allCharacters))
+    }, [dispatch, allCharacters])
+
+    const arrayCharactersList = Array.isArray(charactersList.results)
+        ? charactersList.results
+        : [charactersList.results]
 
     return (
         <section className='content'>
             <div className='content__block'>
-                <div className='episode__info'>
-                    <img className='play_ico' src={locationIco} alt='' />
-                    <h1>{name}</h1><h2>{type}</h2>
-                </div>
+                {thisLocation.length === 0
+                    ? <Loader />
+                    : <div className='episode__info'>
+                        <img className='play_ico' src={locationIco} alt='' />
+                        <h1>{name}</h1><h2>{type}</h2>
+                    </div>
+                }
             </div>
             <div className='episode__list'>
                 <h1 className='episode__list__title'>
                     List of characters that were in this location
                 </h1><hr />
+                {arrayCharactersList.length === 1
+                    ? <Loader />
+                    : <ul>
+                        {arrayCharactersList.map((item) =>
+                            <Link
+                                to={`${PATH_CHARACTER}${item.id}`}
+                                key={item.id}>
+                                <DataList data={item} />
+                            </Link>)
+                        }
+                    </ul>
+                }
             </div>
-            {arrayCharactersList.length === 0
-                ? <p>Loading...</p>
-                : <ul>
-                    {arrayCharactersList.map((item, index) =>
-                        <li className='character__list__item' key={index}>
-                            {`${item.name}`}
-                        </li>)}
-                </ul>}
         </section >
     )
 }
