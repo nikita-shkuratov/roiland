@@ -1,26 +1,25 @@
-.episode__list__title{
+.episode__list__title {
     color: #4d4959;
     font-size: 16px;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 2.6px;
-    border-bottom: 1px solid  #4d4959;
+    border-bottom: 1px solid #4d4959;
     margin: 20px 0px 20px 0px;
     display: flex;
     justify-content: flex-start;
     max-width: 500px;
 }
-.episode__info{
+.episode__info {
     display: flex;
     box-shadow: 0 3px 3px rgba(0, 0, 0, 0.25), 0 3px 3px rgba(0, 0, 0, 0.22);
     justify-content: space-around;
     align-items: center;
     background-color: royalblue;
-    padding:10px;
+    padding: 10px;
     border-radius: 5px;
-    color:#ffffff;
+    color: #ffffff;
 }
-
-.play_ico{
+.play_ico {
     width: 50px;
 }
