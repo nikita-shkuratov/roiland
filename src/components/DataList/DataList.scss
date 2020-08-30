@@ -19,7 +19,7 @@
         &:nth-child(3) {
             width: 25%;
         }
-        &:last-child {
+        &:last-child{
             padding-left: 5%;
         }
     }
@@ -29,11 +29,14 @@
     font-weight: 600;
     color: #1a1818;
 }
+
 @media (max-width: 500px) {
     .content__column {
         display: flex;
         flex-direction: column;
         align-items: center;
+        
+    
         div {
             display: flex;
             justify-content: center;
@@ -41,3 +44,4 @@
         }
     }
 }
+
