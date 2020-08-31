@@ -16,9 +16,9 @@ function Pagination({ currentPage, setCurrentPage, info }) {
 
     return (
         <div className="pagination">
-            <ul>
+            <ul className='pagination__list'>
                 <li
-                    className={`${pagination[0] === currentPage && "disabled"}`}
+                    className={`${pagination[0] === currentPage ? "disabled __show" : "false __show"}`}
                     onClick={handleClick.bind(null, currentPage - 1)}>
                     Prev
                 </li>
@@ -30,7 +30,7 @@ function Pagination({ currentPage, setCurrentPage, info }) {
                         {page}
                     </li>))}
                 <li
-                    className={`${pagination.reverse()[0] === currentPage && "disabled"}`}
+                    className={`${pagination.reverse()[0] === currentPage ? "disabled __show" : "false __show"}`}
                     onClick={handleClick.bind(null, currentPage + 1)}>
                     Next
                 </li>
