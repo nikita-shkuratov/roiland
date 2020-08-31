@@ -34,7 +34,6 @@ $minwidth: 320px;
 	text-align: center;
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
 	padding: 65px;
 }
 
@@ -50,6 +49,7 @@ $minwidth: 320px;
 @import "../components/Characters/CharacterPage/CharacterPage.scss";
 @import "../components/Episodes/EpisodePage/EpisodePage.scss";
 @import "../components/Loader/Loader.scss";
+@import "../components/Pagination/Pagination.scss";
 
 
 //<ОСНОВНОЙ БЛОК>========================================================================================

@@ -18,7 +18,7 @@ function Header() {
           </div>
           <div className={menu ? 'menu__body active' : 'menu__body'}>
             <ul className='menu__list'>
-              <li><NavLink exact to={PATH_CHARACTER} className='menu__link'>Characters</NavLink></li>
+              <li><NavLink to={PATH_CHARACTER} className='menu__link'>Characters</NavLink></li>
               <li><NavLink to={PATH_EPISODE} className='menu__link'>Episodes</NavLink></li>
               <li><NavLink to={PATH_LOCATION} className='menu__link'>Locations</NavLink></li>
             </ul>

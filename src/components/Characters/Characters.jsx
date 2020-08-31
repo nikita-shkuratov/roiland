@@ -6,20 +6,30 @@ import { fethCharacters } from '../../redux/actions/actionsList'
 import { PATH_CHARACTER } from '../../constRotePath'
 import DataList from '../DataList/DataList'
 import Loader from '../Loader/Loader'
+import Pagination from '../Pagination/Pagination'
+import { useState } from 'react'
+
 
 function Characters() {
     const dispatch = useDispatch()
     const charactersList = useSelector(state => state.list.fethedCharacters)
+    const [currentPage, setCurrentPage] = useState(1)
 
     useEffect(() => {
-        dispatch(fethCharacters())
-    }, [dispatch])
+        dispatch(fethCharacters(`?page=${currentPage}`))
+    }, [dispatch, currentPage])
 
     const { results } = charactersList
+    const { info } = charactersList
 
     return (
         <section className='content'>
             <div className='content__block'>
+                <Pagination
+                    currentPage={currentPage}
+                    setCurrentPage={setCurrentPage}
+                    info={info} />
+
                 {!results
                     ? <Loader />
                     : <ul>{results.map(item =>

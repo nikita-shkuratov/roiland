@@ -1,10 +1,10 @@
 import { FETCH_CHARACTERS, FETCH_EPISODES, FETCH_LOCATIONS } from "../types"
 import { URL_GET_CHARACTERS, URL_GET_EPISODES, URL_GET_LOCATIONS } from "../../constApiUrl"
 
-export function fethCharacters() {
+export function fethCharacters(url) {
     return async dispatch => {
         try {
-            const response = await fetch(URL_GET_CHARACTERS)
+            const response = await fetch(`${URL_GET_CHARACTERS}${url}`)
             const json = await response.json()
             dispatch({ type: FETCH_CHARACTERS, payload: json })
         }
@@ -14,10 +14,10 @@ export function fethCharacters() {
     }
 }
 
-export function fethEpisodes(id) {
+export function fethEpisodes(url) {
     return async dispatch => {
         try {
-            const response = await fetch(URL_GET_EPISODES)
+            const response = await fetch(`${URL_GET_EPISODES}${url}`)
             const json = await response.json()
             dispatch({ type: FETCH_EPISODES, payload: json })
         } catch (error) {
@@ -26,10 +26,10 @@ export function fethEpisodes(id) {
     }
 }
 
-export function fethLocations(id) {
+export function fethLocations(url) {
     return async dispatch => {
         try {
-            const response = await fetch(URL_GET_LOCATIONS)
+            const response = await fetch(`${URL_GET_LOCATIONS}${url}`)
             const json = await response.json()
             dispatch({ type: FETCH_LOCATIONS, payload: json })
         } catch (error) {
