@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { fethCharactersEpisode, findEpisode } from '../../../../actions'
+import { fethCharacters, findEpisode } from '../../../../actions'
 import { Link, useRouteMatch } from 'react-router-dom'
 import { PATH_CHARACTER } from '../../../../constants'
 import DataList from '../../../blocks/DataList/DataList'
@@ -17,28 +17,31 @@ function EpisodePage () {
     dispatch(findEpisode(episodId))
   }, [dispatch, episodId])
 
-  const thisEpisode = useSelector(state => state.findEpis.findEpisode)
+  const desiredEpisode = useSelector(
+    state => state.episode.desiredEpisode.episode,
+  )
   const charactersList = useSelector(
-    state => state.charForEpis.charactersForEpisode,
+    state => state.character.listCharacters.results,
   )
 
-  const { name, air_date, episode, characters } = thisEpisode
-  const allCharacters = thisEpisode.length
+  const { name, air_date, episode, characters } = desiredEpisode
+
+  const allCharacters = characters
     ? characters.map(item => item.slice(42)).join()
     : ''
 
   useEffect(() => {
-    dispatch(fethCharactersEpisode(allCharacters))
+    dispatch(fethCharacters(allCharacters))
   }, [dispatch, allCharacters])
 
-  const arrayCharactersList = Array.isArray(charactersList.results)
-    ? charactersList.results
-    : [charactersList.results]
+  const arrayCharactersList = Array.isArray(charactersList)
+    ? charactersList
+    : [charactersList]
 
   return (
     <section className="content">
       <div className="content__block">
-        {thisEpisode.length === 0 ? (
+        {desiredEpisode.length === 0 ? (
           <Loader />
         ) : (
           <div className="episode__info">
@@ -54,7 +57,7 @@ function EpisodePage () {
           List of characters that were in this episode
         </h1>
         <hr />
-        {arrayCharactersList.length === 1 ? (
+        {arrayCharactersList.length === 0 ? (
           <Loader />
         ) : (
           <ul>

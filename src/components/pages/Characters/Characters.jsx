@@ -9,15 +9,17 @@ import Pagination from '../../controls/Pagination/Pagination'
 
 function Characters () {
   const dispatch = useDispatch()
-  const charactersList = useSelector(state => state.list.fethedCharacters)
+  const charactersList = useSelector(state => state.character.listCharacters.results)
+  const charactersPage = useSelector(state => state.character.listCharacters.page)
+  const charactersLoading = useSelector(state => state.character.listCharacters.loading)
+
   const [currentPage, setCurrentPage] = useState(1)
 
   useEffect(() => {
     dispatch(fethCharacters(`?page=${currentPage}`))
   }, [dispatch, currentPage])
 
-  const { results } = charactersList
-  const { info } = charactersList
+  const { results, info } = charactersList
 
   return (
     <section className="content">

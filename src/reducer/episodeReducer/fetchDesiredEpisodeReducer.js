@@ -10,7 +10,7 @@ export const fetchDesiredEpisodeReducer = (state = initialState, action) => {
     case FIND_EPISODE:
       return {
         ...state,
-        findEpisode: action.payload,
+        episode: action.payload,
       }
     default:
       return state

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { fethCharactersLocation, findLocation } from '../../../../actions'
+import { fethCharacters, findLocation } from '../../../../actions'
 import { Link, useRouteMatch } from 'react-router-dom'
 import { PATH_CHARACTER } from '../../../../constants'
 import locationIco from '../../../../style/img/location-ico.png'
@@ -10,35 +10,35 @@ import Loader from '../../../blocks/Loader/Loader'
 function LocationPage () {
   const dispatch = useDispatch()
   const {
-    params: { id: episodId },
+    params: { id: locationdId },
   } = useRouteMatch()
 
   useEffect(() => {
-    dispatch(findLocation(episodId))
-  }, [dispatch, episodId])
+    dispatch(findLocation(locationdId))
+  }, [dispatch, locationdId])
 
-  const thisLocation = useSelector(state => state.findLoc.findLocation)
+  const desiredLocation = useSelector(state => state.location.desiredLocation.location)
   const charactersList = useSelector(
-    state => state.charForLoc.charactersForLocation,
+    state => state.character.listCharacters.results,
   )
 
-  const { name, type, residents } = thisLocation
-  const allCharacters = thisLocation.length
+  const { name, type, residents } = desiredLocation
+  const allCharacters = residents
     ? residents.map(item => item.slice(42)).join()
     : ''
 
   useEffect(() => {
-    dispatch(fethCharactersLocation(allCharacters))
+    dispatch(fethCharacters(allCharacters))
   }, [dispatch, allCharacters])
 
-  const arrayCharactersList = Array.isArray(charactersList.results)
-    ? charactersList.results
-    : [charactersList.results]
+  const arrayCharactersList = Array.isArray(charactersList)
+    ? charactersList
+    : [charactersList]
 
   return (
     <section className="content">
       <div className="content__block">
-        {thisLocation.length === 0 ? (
+        {desiredLocation.length === 0 ? (
           <Loader />
         ) : (
           <div className="episode__info">
@@ -53,7 +53,7 @@ function LocationPage () {
           List of characters that were in this location
         </h1>
         <hr />
-        {arrayCharactersList.length === 1 ? (
+        {arrayCharactersList.length === 0 ? (
           <Loader />
         ) : (
           <ul>

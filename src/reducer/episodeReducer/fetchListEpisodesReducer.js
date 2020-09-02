@@ -1,7 +1,7 @@
 import { FETCH_EPISODES } from '../../constants'
 
 const initialState = {
-  list: [],
+  results: [],
   page: 1,
   loading: false,
 }
@@ -9,7 +9,7 @@ const initialState = {
 export const fetchListEpisodesReducer = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_EPISODES:
-      return { ...state, fethedEpisodes: action.payload }
+      return { ...state, results: action.payload }
     default:
       return state
   }

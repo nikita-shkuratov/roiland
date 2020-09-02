@@ -10,7 +10,7 @@ export const fetchDesiredLocationReducer = (state = initialState, action) => {
     case FIND_LOCATION:
       return {
         ...state,
-        findLocation: action.payload,
+        location: action.payload,
       }
     default:
       return state

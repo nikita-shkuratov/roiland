@@ -9,15 +9,17 @@ import Pagination from '../../controls/Pagination/Pagination'
 
 function Episodes () {
   const dispatch = useDispatch()
-  const episodesList = useSelector(state => state.list.fethedEpisodes)
+  const episodesList = useSelector(state => state.episode.listEpisodes.results)
+  const episodesPage = useSelector(state => state.episode.listEpisodes.page)
+  const episodesLoading = useSelector(state => state.episode.listEpisodes.loading)
+
   const [currentPage, setCurrentPage] = useState(1)
 
   useEffect(() => {
     dispatch(fethEpisodes(`?page=${currentPage}`))
   }, [dispatch, currentPage])
 
-  const { results } = episodesList
-  const { info } = episodesList
+  const { results, info } = episodesList
 
   return (
     <section className="content">

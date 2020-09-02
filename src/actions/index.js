@@ -1,3 +1,3 @@
-export * from './actionsFind'
-export * from './actionsList'
-export * from './actionsListForPage'
+export * from './characterAction'
+export * from './locationActions'
+export * from './episodeAction'

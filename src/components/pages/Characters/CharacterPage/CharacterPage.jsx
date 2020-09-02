@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { fethEpisodesCharacter, findCharacter } from '../../../../actions'
+import { fethEpisodes, findCharacter } from '../../../../actions'
 import { Link, useRouteMatch } from 'react-router-dom'
 import { PATH_EPISODE } from '../../../../constants'
 import DataList from '../../../blocks/DataList/DataList'
@@ -16,9 +16,9 @@ function CharacterPage () {
     dispatch(findCharacter(characterId))
   }, [dispatch, characterId])
 
-  const thisCharacter = useSelector(state => state.findChar.findCharacter)
+  const desiredCharacter = useSelector(state => state.character.desiredCharacter.character)
   const episodesList = useSelector(
-    state => state.episForChar.episodesForCharacter,
+    state => state.episode.listEpisodes.results,
   )
 
   const {
@@ -29,23 +29,24 @@ function CharacterPage () {
     image,
     episode,
     origin,
-  } = thisCharacter
-  const allEpisodes = thisCharacter.length
+  } = desiredCharacter
+
+  const allEpisodes = episode
     ? episode.map(item => item.slice(40)).join()
     : ''
 
   useEffect(() => {
-    dispatch(fethEpisodesCharacter(allEpisodes))
+    dispatch(fethEpisodes(allEpisodes))
   }, [dispatch, allEpisodes])
 
-  const arrayEpisodesList = Array.isArray(episodesList.results)
-    ? episodesList.results
-    : [episodesList.results]
+  const arrayEpisodesList = Array.isArray(episodesList)
+    ? episodesList
+    : [episodesList]
 
   return (
     <section className="content">
       <div className="content__block">
-        {thisCharacter.length === 0 ? (
+        {desiredCharacter.length === 0 ? (
           <Loader />
         ) : (
           <div className="caracter">
@@ -67,7 +68,7 @@ function CharacterPage () {
             List of episodes with this character
           </h1>
           <hr />
-          {arrayEpisodesList.length === 1 ? (
+          {arrayEpisodesList.length === 0 ? (
             <Loader />
           ) : (
             <ul>

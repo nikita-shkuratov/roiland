@@ -10,7 +10,7 @@ export const fetchDesiredCharacterReducer = (state = initialState, action) => {
     case FIND_CHARACTER:
       return {
         ...state,
-        findCharacter: action.payload,
+        character: action.payload,
       }
     default:
       return state

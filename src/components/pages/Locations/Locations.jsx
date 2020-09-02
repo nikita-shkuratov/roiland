@@ -9,15 +9,17 @@ import Pagination from '../../controls/Pagination/Pagination'
 
 function Locations () {
   const dispatch = useDispatch()
-  const locationsList = useSelector(state => state.list.fethedLocations)
+  const locationsList = useSelector(state => state.location.listLocations.results)
+  const locationsPage = useSelector(state => state.location.listLocations.page)
+  const locationsLoading = useSelector(state => state.location.listLocations.loading)
+
   const [currentPage, setCurrentPage] = useState(1)
 
   useEffect(() => {
     dispatch(fethLocations(`?page=${currentPage}`))
   }, [dispatch, currentPage])
 
-  const { results } = locationsList
-  const { info } = locationsList
+  const { results, info } = locationsList
 
   return (
     <section className="content">
