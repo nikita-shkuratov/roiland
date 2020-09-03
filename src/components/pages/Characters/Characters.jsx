@@ -10,8 +10,7 @@ import Pagination from '../../controls/Pagination/Pagination'
 function Characters () {
   const dispatch = useDispatch()
   const charactersList = useSelector(state => state.character.listCharacters.results)
-  const charactersPage = useSelector(state => state.character.listCharacters.page)
-  const charactersLoading = useSelector(state => state.character.listCharacters.loading)
+  const loading = useSelector(state => state.app.loading)
 
   const [currentPage, setCurrentPage] = useState(1)
 
@@ -29,11 +28,11 @@ function Characters () {
           setCurrentPage={setCurrentPage}
           info={info} />
 
-        {!results ? (
+        {loading ? (
           <Loader />
         ) : (
           <ul>
-            {results.map(item => (
+            {results && results.map(item => (
               <Link to={`${PATH_CHARACTER}${item.id}`} key={item.id}>
                 <DataList data={item} />
               </Link>

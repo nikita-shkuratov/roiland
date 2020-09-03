@@ -2,7 +2,6 @@ import { FIND_EPISODE } from '../../constants'
 
 const initialState = {
   episode: [],
-  loading: false,
 }
 
 export const fetchDesiredEpisodeReducer = (state = initialState, action) => {

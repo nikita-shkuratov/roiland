@@ -3,13 +3,16 @@ import {
   FETCH_LOCATIONS,
   FIND_LOCATION,
 } from '../constants'
+import { showLoader, hideLoader } from './appAction'
 
 export function fethLocations (url) {
   return async dispatch => {
     try {
+      dispatch(showLoader())
       const response = await fetch(`${URL_GET_LOCATIONS}${url}`)
       const json = await response.json()
       dispatch({ type: FETCH_LOCATIONS, payload: json })
+      dispatch(hideLoader())
     } catch (error) {
       console.log(`server error - ${error}`)
     }

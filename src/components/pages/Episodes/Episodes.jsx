@@ -10,8 +10,7 @@ import Pagination from '../../controls/Pagination/Pagination'
 function Episodes () {
   const dispatch = useDispatch()
   const episodesList = useSelector(state => state.episode.listEpisodes.results)
-  const episodesPage = useSelector(state => state.episode.listEpisodes.page)
-  const episodesLoading = useSelector(state => state.episode.listEpisodes.loading)
+  const loading = useSelector(state => state.app.loading)
 
   const [currentPage, setCurrentPage] = useState(1)
 
@@ -29,11 +28,11 @@ function Episodes () {
           setCurrentPage={setCurrentPage}
           info={info} />
 
-        {!results ? (
+        {loading ? (
           <Loader />
         ) : (
           <ul>
-            {results.map(item => (
+            {results && results.map(item => (
               <Link to={`${PATH_EPISODE}${item.id}`} key={item.id}>
                 <DataList data={item} />
               </Link>

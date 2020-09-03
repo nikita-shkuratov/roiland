@@ -2,7 +2,6 @@ import { FIND_LOCATION } from '../../constants'
 
 const initialState = {
   location: [],
-  loading: false,
 }
 
 export const fetchDesiredLocationReducer = (state = initialState, action) => {

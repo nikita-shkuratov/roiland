@@ -2,8 +2,6 @@ import { FETCH_EPISODES } from '../../constants'
 
 const initialState = {
   results: [],
-  page: 1,
-  loading: false,
 }
 
 export const fetchListEpisodesReducer = (state = initialState, action) => {

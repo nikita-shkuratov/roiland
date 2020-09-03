@@ -10,8 +10,7 @@ import Pagination from '../../controls/Pagination/Pagination'
 function Locations () {
   const dispatch = useDispatch()
   const locationsList = useSelector(state => state.location.listLocations.results)
-  const locationsPage = useSelector(state => state.location.listLocations.page)
-  const locationsLoading = useSelector(state => state.location.listLocations.loading)
+  const loading = useSelector(state => state.app.loading)
 
   const [currentPage, setCurrentPage] = useState(1)
 
@@ -29,11 +28,11 @@ function Locations () {
           setCurrentPage={setCurrentPage}
           info={info} />
 
-        {!results ? (
+        {loading ? (
           <Loader />
         ) : (
           <ul>
-            {results.map(item => (
+            {results && results.map(item => (
               <Link to={`${PATH_LOCATION}${item.id}`} key={item.id}>
                 <DataList data={item} />
               </Link>

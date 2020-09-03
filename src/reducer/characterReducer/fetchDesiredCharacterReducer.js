@@ -2,7 +2,6 @@ import { FIND_CHARACTER } from '../../constants'
 
 const initialState = {
   character: [],
-  loading: false,
 }
 
 export const fetchDesiredCharacterReducer = (state = initialState, action) => {

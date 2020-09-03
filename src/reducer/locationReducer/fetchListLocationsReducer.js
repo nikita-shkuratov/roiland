@@ -2,8 +2,6 @@ import { FETCH_LOCATIONS } from '../../constants'
 
 const initialState = {
   results: [],
-  page: 1,
-  loading: false,
 }
 
 export const fetchListLocationsReducer = (state = initialState, action) => {

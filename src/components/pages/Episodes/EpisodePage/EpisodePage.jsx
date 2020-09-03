@@ -26,9 +26,7 @@ function EpisodePage () {
 
   const { name, air_date, episode, characters } = desiredEpisode
 
-  const allCharacters = characters
-    ? characters.map(item => item.slice(42)).join()
-    : ''
+  const allCharacters = characters ? characters.map(item => item.slice(42)).join() : ''
 
   useEffect(() => {
     dispatch(fethCharacters(allCharacters))
@@ -61,8 +59,8 @@ function EpisodePage () {
           <Loader />
         ) : (
           <ul>
-            {arrayCharactersList.map(item => (
-              <Link to={`${PATH_CHARACTER}${item.id}`} key={item.id}>
+            {arrayCharactersList.map((item, index) => (
+              <Link to={`${PATH_CHARACTER}${item.id}`} key={index}>
                 <DataList data={item} />
               </Link>
             ))}
