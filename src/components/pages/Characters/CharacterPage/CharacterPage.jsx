@@ -35,7 +35,7 @@ function CharacterPage () {
   } = desiredCharacter
 
   const allEpisodes = episode
-    ? episode.map(item => item.slice(40)).join()
+    ? episode.map(item => parseInt(item.match(/\d+/))).join()
     : ''
 
   useEffect(() => {

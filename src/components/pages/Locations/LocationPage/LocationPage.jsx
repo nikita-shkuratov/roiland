@@ -23,7 +23,9 @@ function LocationPage () {
   )
 
   const { name, type, residents } = desiredLocation
-  const allCharacters = residents ? residents.map(item => item.slice(42)).join() : ''
+  const allCharacters = residents
+    ? residents.map(item => parseInt(item.match(/\d+/))).join()
+    : ''
 
   useEffect(() => {
     dispatch(fetchCharacters(allCharacters))

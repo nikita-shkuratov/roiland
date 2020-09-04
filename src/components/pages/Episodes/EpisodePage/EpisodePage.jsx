@@ -26,7 +26,9 @@ function EpisodePage () {
 
   const { name, air_date, episode, characters } = desiredEpisode
 
-  const allCharacters = characters ? characters.map(item => item.slice(42)).join() : ''
+  const allCharacters = characters
+    ? characters.map(item => parseInt(item.match(/\d+/))).join()
+    : ''
 
   useEffect(() => {
     dispatch(fetchCharacters(allCharacters))
