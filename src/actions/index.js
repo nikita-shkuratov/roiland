@@ -1,3 +1,3 @@
-export * from './characterAction'
+export * from './characterActions'
+export * from './episodeActions'
 export * from './locationActions'
-export * from './episodeAction'

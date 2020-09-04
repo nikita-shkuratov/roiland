@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { fethCharacters, findLocation } from '../../../../actions'
+import { fetchCharacters, fetchLocation } from '../../../../actions'
 import { Link, useRouteMatch } from 'react-router-dom'
 import { PATH_CHARACTER } from '../../../../constants'
 import locationIco from '../../../../style/img/location-ico.png'
@@ -14,19 +14,19 @@ function LocationPage () {
   } = useRouteMatch()
 
   useEffect(() => {
-    dispatch(findLocation(locationdId))
+    dispatch(fetchLocation(locationdId))
   }, [dispatch, locationdId])
 
-  const desiredLocation = useSelector(state => state.location.desiredLocation.location)
+  const desiredLocation = useSelector(state => state.location.desiredLocation)
   const charactersList = useSelector(
-    state => state.character.listCharacters.results,
+    state => state.character.listCharacters,
   )
 
   const { name, type, residents } = desiredLocation
   const allCharacters = residents ? residents.map(item => item.slice(42)).join() : ''
 
   useEffect(() => {
-    dispatch(fethCharacters(allCharacters))
+    dispatch(fetchCharacters(allCharacters))
   }, [dispatch, allCharacters])
 
   const arrayCharactersList = Array.isArray(charactersList)

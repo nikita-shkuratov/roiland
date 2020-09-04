@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { fethEpisodes, findCharacter } from '../../../../actions'
+import { fetchEpisodes, fetchCharacter } from '../../../../actions'
 import { Link, useRouteMatch } from 'react-router-dom'
 import { PATH_EPISODE } from '../../../../constants'
 import DataList from '../../../blocks/DataList/DataList'
@@ -13,13 +13,16 @@ function CharacterPage () {
   } = useRouteMatch()
 
   useEffect(() => {
-    dispatch(findCharacter(characterId))
+    dispatch(fetchCharacter(characterId))
   }, [dispatch, characterId])
 
-  const desiredCharacter = useSelector(state => state.character.desiredCharacter.character)
-  const episodesList = useSelector(
-    state => state.episode.listEpisodes.results,
+  const desiredCharacter = useSelector(
+    state => state.character.desiredCharacter,
   )
+  const episodesList = useSelector(
+    state => state.episode.listEpisodes,
+  )
+  const loading = useSelector(state => state.character.loading)
 
   const {
     name,
@@ -36,7 +39,7 @@ function CharacterPage () {
     : ''
 
   useEffect(() => {
-    dispatch(fethEpisodes(allEpisodes))
+    dispatch(fetchEpisodes(allEpisodes))
   }, [dispatch, allEpisodes])
 
   const arrayEpisodesList = Array.isArray(episodesList)
@@ -46,20 +49,23 @@ function CharacterPage () {
   return (
     <section className="content">
       <div className="content__block">
-        {desiredCharacter.length === 0 ? (
+        {loading ? (
           <Loader />
         ) : (
           <div className="caracter">
             <div className="character__img">
               <img className="avatar" src={image} alt="" />
             </div>
-            <div className="character__info">
-              <p>{`NAME : ${name}`}</p>
-              <p>{`GENDER : ${gender}`}</p>
-              <p>{`SPECIES : ${species}`}</p>
-              <p>{`ORIGIN : ${origin.name}`}</p>
-              <p>{`STATUS : ${status}`}</p>
-            </div>
+
+            {origin && (
+              <div className="character__info">
+                <p>{`NAME : ${name}`}</p>
+                <p>{`GENDER : ${gender}`}</p>
+                <p>{`SPECIES : ${species}`}</p>
+                <p>{`ORIGIN : ${origin.name}`}</p>
+                <p>{`STATUS : ${status}`}</p>
+              </div>
+            )}
           </div>
         )}
 

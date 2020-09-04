@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { fethCharacters, findEpisode } from '../../../../actions'
+import { fetchCharacters, fetchEpisode } from '../../../../actions'
 import { Link, useRouteMatch } from 'react-router-dom'
 import { PATH_CHARACTER } from '../../../../constants'
 import DataList from '../../../blocks/DataList/DataList'
@@ -14,14 +14,14 @@ function EpisodePage () {
   } = useRouteMatch()
 
   useEffect(() => {
-    dispatch(findEpisode(episodId))
+    dispatch(fetchEpisode(episodId))
   }, [dispatch, episodId])
 
   const desiredEpisode = useSelector(
-    state => state.episode.desiredEpisode.episode,
+    state => state.episode.desiredEpisode,
   )
   const charactersList = useSelector(
-    state => state.character.listCharacters.results,
+    state => state.character.listCharacters,
   )
 
   const { name, air_date, episode, characters } = desiredEpisode
@@ -29,7 +29,7 @@ function EpisodePage () {
   const allCharacters = characters ? characters.map(item => item.slice(42)).join() : ''
 
   useEffect(() => {
-    dispatch(fethCharacters(allCharacters))
+    dispatch(fetchCharacters(allCharacters))
   }, [dispatch, allCharacters])
 
   const arrayCharactersList = Array.isArray(charactersList)
@@ -55,7 +55,7 @@ function EpisodePage () {
           List of characters that were in this episode
         </h1>
         <hr />
-        {arrayCharactersList.length === 0 ? (
+        {arrayCharactersList.length === 1 ? (
           <Loader />
         ) : (
           <ul>
