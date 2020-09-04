@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { fetchEpisodes } from '../../../actions'
@@ -10,10 +10,9 @@ import Pagination from '../../controls/Pagination/Pagination'
 function Episodes () {
   const dispatch = useDispatch()
   const episodesList = useSelector(state => state.episode.listEpisodes)
+  const currentPage = useSelector(state => state.episode.pageEpisodes)
   const loading = useSelector(state => state.episode.loading)
   const loaded = useSelector(state => state.episode.loaded)
-
-  const [currentPage, setCurrentPage] = useState(1)
 
   useEffect(() => {
     dispatch(fetchEpisodes(`?page=${currentPage}`))
@@ -25,8 +24,6 @@ function Episodes () {
     <section className="content">
       <div className="content__block">
         <Pagination
-          currentPage={currentPage}
-          setCurrentPage={setCurrentPage}
           info={info} />
 
         {loading ? (

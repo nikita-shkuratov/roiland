@@ -1,7 +1,35 @@
 import React from 'react'
 import { createPagination } from './createPagination'
+import { useSelector, useDispatch } from 'react-redux'
+import { useLocation } from 'react-router-dom'
+import { setPageCharacters, setPageEpisodes, setPageLocations } from '../../../actions'
+import { PATH_LOCATION, PATH_EPISODE, PATH_CHARACTER } from '../../../constants'
 
-function Pagination ({ currentPage, setCurrentPage, info }) {
+function Pagination ({ info }) {
+  const dispatch = useDispatch()
+  const { pathname } = useLocation()
+
+  const currentPageCharacters = useSelector(
+    state => state.character.pageCharacters,
+  )
+  const currentPageEpisodes = useSelector(
+    state => state.episode.pageEpisodes,
+  )
+  const currentPageLocations = useSelector(
+    state => state.location.pageLocations,
+  )
+
+  function definingPage () {
+    if (pathname === PATH_CHARACTER) {
+      return { currentPage: currentPageCharacters }
+    } else if (pathname === PATH_EPISODE) {
+      return { currentPage: currentPageEpisodes }
+    } else if (pathname === PATH_LOCATION) {
+      return { currentPage: currentPageLocations }
+    }
+  }
+
+  const { currentPage } = definingPage()
   const { count } = info || 200
 
   const { pagination } = createPagination({
@@ -11,7 +39,15 @@ function Pagination ({ currentPage, setCurrentPage, info }) {
     currentPage,
   })
 
-  const handleClick = page => () => setCurrentPage(page)
+  const handleClick = page => () => {
+    if (pathname === PATH_CHARACTER) {
+      dispatch(setPageCharacters(page))
+    } else if (pathname === PATH_EPISODE) {
+      dispatch(setPageEpisodes(page))
+    } else if (pathname === PATH_LOCATION) {
+      dispatch(setPageLocations(page))
+    }
+  }
 
   return (
     <div className="pagination">
