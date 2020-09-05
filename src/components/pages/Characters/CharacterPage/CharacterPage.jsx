@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchEpisodes, fetchCharacter } from '../../../../actions'
-import { Link, useRouteMatch } from 'react-router-dom'
-import { PATH_EPISODE } from '../../../../constants'
+import { useRouteMatch } from 'react-router-dom'
 import DataList from '../../../blocks/DataList/DataList'
 import Loader from '../../../blocks/Loader/Loader'
+import DataCard from '../../../blocks/DataCard/DataCard'
 
 function CharacterPage () {
   const dispatch = useDispatch()
@@ -23,23 +23,16 @@ function CharacterPage () {
     state => state.episode.listEpisodes,
   )
   const loading = useSelector(state => state.character.loading)
+  const loaded = useSelector(state => state.character.loaded)
 
-  const {
-    name,
-    status,
-    species,
-    gender,
-    image,
-    episode,
-    origin,
-  } = desiredCharacter
+  const { episode } = desiredCharacter
 
   const allEpisodes = episode
     ? episode.map(item => parseInt(item.match(/\d+/))).join()
     : ''
 
   useEffect(() => {
-    dispatch(fetchEpisodes(allEpisodes))
+    episode && dispatch(fetchEpisodes(allEpisodes))
   }, [dispatch, allEpisodes])
 
   const arrayEpisodesList = Array.isArray(episodesList)
@@ -49,42 +42,15 @@ function CharacterPage () {
   return (
     <section className="content">
       <div className="content__block">
-        {loading ? (
-          <Loader />
-        ) : (
-          <div className="caracter">
-            <div className="character__img">
-              <img className="avatar" src={image} alt="" />
-            </div>
-
-            {origin && (
-              <div className="character__info">
-                <p>{`NAME : ${name}`}</p>
-                <p>{`GENDER : ${gender}`}</p>
-                <p>{`SPECIES : ${species}`}</p>
-                <p>{`ORIGIN : ${origin.name}`}</p>
-                <p>{`STATUS : ${status}`}</p>
-              </div>
-            )}
-          </div>
-        )}
-
+        {desiredCharacter === 0 ? <Loader /> : <DataCard character={desiredCharacter} />}
         <div className="character__list">
           <h1 className="character__list__title">
             List of episodes with this character
           </h1>
           <hr />
-          {arrayEpisodesList.length === 0 ? (
-            <Loader />
-          ) : (
-            <ul>
-              {arrayEpisodesList.map((item, index) => (
-                <Link to={`${PATH_EPISODE}${item.id}`} key={index}>
-                  <DataList data={item} />
-                </Link>
-              ))}
-            </ul>
-          )}
+          {arrayEpisodesList.length === 0
+            ? <Loader />
+            : <DataList episode={arrayEpisodesList} />}
         </div>
       </div>
     </section>

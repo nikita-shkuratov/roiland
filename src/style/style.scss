@@ -46,8 +46,7 @@ $minwidth: 320px;
 //</ПОДКЛЮЧЕНИЕ ФАЙЛОВ СТИЛЕЙ СТРАНИЦ И ЭЛЕМЕНТОВ>========================================================
 @import "../components/blocks/Header/Header.scss";
 @import "../components/blocks/DataList/DataList.scss";
-@import "../components/pages/Characters/CharacterPage/CharacterPage.scss";
-@import "../components/pages/Episodes/EpisodePage/EpisodePage.scss";
+@import "../components/blocks/DataCard/DataCard.scss";
 @import "../components/blocks/Loader/Loader.scss";
 @import "../components/controls/Pagination/Pagination.scss";
 

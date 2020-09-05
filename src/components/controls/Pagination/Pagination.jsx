@@ -5,7 +5,7 @@ import { useLocation } from 'react-router-dom'
 import { setPageCharacters, setPageEpisodes, setPageLocations } from '../../../actions'
 import { PATH_LOCATION, PATH_EPISODE, PATH_CHARACTER } from '../../../constants'
 
-function Pagination ({ info }) {
+function Pagination ({ data: { info } }) {
   const dispatch = useDispatch()
   const { pathname } = useLocation()
 

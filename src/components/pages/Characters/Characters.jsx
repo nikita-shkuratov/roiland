@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
 import { fetchCharacters } from '../../../actions'
-import { PATH_CHARACTER } from '../../../constants'
 import DataList from '../../blocks/DataList/DataList'
 import Loader from '../../blocks/Loader/Loader'
 import Pagination from '../../controls/Pagination/Pagination'
@@ -18,26 +16,15 @@ function Characters () {
     dispatch(fetchCharacters(`?page=${currentPage}`))
   }, [dispatch, currentPage])
 
-  const { results, info } = charactersList
-
   return (
     <section className="content">
       <div className="content__block">
         <Pagination
-          info={info} />
+          data={charactersList} />
 
-        {loading ? (
-          <Loader />
-        ) : (
-          <ul>
-            {results &&
-              results.map(item => (
-                <Link to={`${PATH_CHARACTER}${item.id}`} key={item.id}>
-                  <DataList data={item} />
-                </Link>
-              ))}
-          </ul>
-        )}
+        {charactersList === 0
+          ? <Loader />
+          : <DataList character={charactersList.results} />}
       </div>
     </section>
   )

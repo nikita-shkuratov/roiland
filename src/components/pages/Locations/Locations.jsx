@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchLocations } from '../../../actions'
-import { Link } from 'react-router-dom'
-import { PATH_LOCATION } from '../../../constants'
 import DataList from '../../blocks/DataList/DataList'
 import Loader from '../../blocks/Loader/Loader'
 import Pagination from '../../controls/Pagination/Pagination'
@@ -18,25 +16,14 @@ function Locations () {
     dispatch(fetchLocations(`?page=${currentPage}`))
   }, [dispatch, currentPage])
 
-  const { results, info } = locationsList
-
   return (
     <section className="content">
       <div className="content__block">
-        <Pagination
-          info={info} />
+        <Pagination data={locationsList} />
 
-        {loading ? (
-          <Loader />
-        ) : (
-          <ul>
-            {results && results.map(item => (
-              <Link to={`${PATH_LOCATION}${item.id}`} key={item.id}>
-                <DataList data={item} />
-              </Link>
-            ))}
-          </ul>
-        )}
+        {locationsList === 0
+          ? <Loader />
+          : <DataList location={locationsList.results} />}
       </div>
     </section>
   )
