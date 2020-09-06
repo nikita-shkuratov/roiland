@@ -23,7 +23,6 @@ function CharacterPage () {
     state => state.episode.listEpisodes,
   )
   const loading = useSelector(state => state.character.loading)
-  const loaded = useSelector(state => state.character.loaded)
 
   const { episode } = desiredCharacter
 
@@ -33,7 +32,7 @@ function CharacterPage () {
 
   useEffect(() => {
     episode && dispatch(fetchEpisodes(allEpisodes))
-  }, [dispatch, allEpisodes])
+  }, [dispatch, allEpisodes, episode])
 
   const arrayEpisodesList = Array.isArray(episodesList)
     ? episodesList
@@ -42,13 +41,13 @@ function CharacterPage () {
   return (
     <section className="content">
       <div className="content__block">
-        {desiredCharacter === 0 ? <Loader /> : <DataCard character={desiredCharacter} />}
+        {loading ? <Loader /> : <DataCard character={desiredCharacter} />}
         <div className="character__list">
           <h1 className="character__list__title">
             List of episodes with this character
           </h1>
           <hr />
-          {arrayEpisodesList.length === 0
+          {loading
             ? <Loader />
             : <DataList episode={arrayEpisodesList} />}
         </div>

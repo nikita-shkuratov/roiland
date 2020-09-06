@@ -10,7 +10,6 @@ function Locations () {
   const locationsList = useSelector(state => state.location.listLocations)
   const currentPage = useSelector(state => state.location.pageLocations)
   const loading = useSelector(state => state.location.loading)
-  const loaded = useSelector(state => state.location.loaded)
 
   useEffect(() => {
     dispatch(fetchLocations(`?page=${currentPage}`))
@@ -21,7 +20,7 @@ function Locations () {
       <div className="content__block">
         <Pagination data={locationsList} />
 
-        {locationsList === 0
+        {loading
           ? <Loader />
           : <DataList location={locationsList.results} />}
       </div>

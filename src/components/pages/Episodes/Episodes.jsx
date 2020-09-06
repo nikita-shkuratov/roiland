@@ -10,7 +10,6 @@ function Episodes () {
   const episodesList = useSelector(state => state.episode.listEpisodes)
   const currentPage = useSelector(state => state.episode.pageEpisodes)
   const loading = useSelector(state => state.episode.loading)
-  const loaded = useSelector(state => state.episode.loaded)
 
   useEffect(() => {
     dispatch(fetchEpisodes(`?page=${currentPage}`))
@@ -21,7 +20,7 @@ function Episodes () {
       <div className="content__block">
         <Pagination data={episodesList} />
 
-        {episodesList === 0
+        {loading
           ? <Loader />
           : <DataList episode={episodesList.results} />}
       </div>

@@ -10,19 +10,18 @@ function Characters () {
   const charactersList = useSelector(state => state.character.listCharacters)
   const currentPage = useSelector(state => state.character.pageCharacters)
   const loading = useSelector(state => state.character.loading)
-  const loaded = useSelector(state => state.character.loaded)
 
   useEffect(() => {
+    console.log('render')
     dispatch(fetchCharacters(`?page=${currentPage}`))
   }, [dispatch, currentPage])
 
   return (
     <section className="content">
       <div className="content__block">
-        <Pagination
-          data={charactersList} />
+        <Pagination data={charactersList} />
 
-        {charactersList === 0
+        {loading
           ? <Loader />
           : <DataList character={charactersList.results} />}
       </div>

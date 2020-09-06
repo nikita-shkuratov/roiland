@@ -11,7 +11,6 @@ const initialState = {
   desiredEpisode: [],
   pageEpisodes: 1,
   loading: false,
-  loaded: false,
 }
 
 export function episodeReducer (state = initialState, action) {
@@ -20,22 +19,23 @@ export function episodeReducer (state = initialState, action) {
       return {
         ...state,
         loading: true,
-        loaded: false,
         listEpisodes: action.payload,
       }
     case SUCCESS_FETCH_EPISODES:
       return {
         ...state,
         loading: false,
-        loaded: true,
       }
     case START_FETCH_EPISODE:
-      return { ...state, loading: true, loaded: false, desiredEpisode: action.payload }
+      return {
+        ...state,
+        loading: true,
+        desiredEpisode: action.payload,
+      }
     case SUCCESS_FETCH_EPISODE:
       return {
         ...state,
         loading: false,
-        loaded: true,
       }
     case SET_PAGE_EPISODES:
       return { ...state, pageEpisodes: action.payload }

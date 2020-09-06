@@ -22,7 +22,6 @@ function LocationPage () {
   )
 
   const loading = useSelector(state => state.episode.loading)
-  const loaded = useSelector(state => state.episode.loaded)
 
   const { residents } = desiredLocation
 
@@ -32,7 +31,7 @@ function LocationPage () {
 
   useEffect(() => {
     residents && dispatch(fetchCharacters(allCharacters))
-  }, [dispatch, allCharacters])
+  }, [dispatch, allCharacters, residents])
 
   const arrayCharactersList = Array.isArray(charactersList)
     ? charactersList
@@ -41,16 +40,16 @@ function LocationPage () {
   return (
     <section className="content">
       <div className="content__block">
-        {desiredLocation.length === 0 ? (
-          <Loader />
-        ) : <DataCard location={desiredLocation} />}
+        {loading
+          ? <Loader />
+          : <DataCard location={desiredLocation} />}
       </div>
       <div className="episode__list">
         <h1 className="episode__list__title">
           List of characters that were in this location
         </h1>
         <hr />
-        {arrayCharactersList.length === 0
+        {loading
           ? <Loader />
           : <DataList character={arrayCharactersList} />}
       </div>
