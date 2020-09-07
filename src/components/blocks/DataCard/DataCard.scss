@@ -1,8 +1,19 @@
-//characters page
-.caracter {
+.page__container{
     display: flex;
-}
-.character__info {
+    flex-direction: column;
+    margin-top: 10px;
+    
+};
+.card{
+    display: flex;
+    padding-top: 20px;
+    border-top: 1px solid #4d4959;;
+};
+
+.card__avatar{
+ width: 200px;
+};
+.card__info{
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -13,22 +24,13 @@
     p {
         margin-bottom: 10px;
     }
-}
-.avatar {
-    width: 200px;
-}
-.item_info {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    p {
-        margin-left: 10%;
-        &:last-child {
-            margin-left: 5%;
-        }
-    }
-}
-.character__list__title {
+};
+.list__for__card{
+margin: 0 auto;
+width: 100%;
+    
+};
+.list__for__card__title{
     color: #4d4959;
     font-size: 16px;
     font-weight: 700;
@@ -36,56 +38,4 @@
     letter-spacing: 2.6px;
     border-bottom: 1px solid #4d4959;
     margin: 20px 0px 20px 0px;
-    display: flex;
-    justify-content: center;
-    max-width: 500px;
-}
-.character__list__item {
-    border-radius: 5px;
-    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.25), 0 3px 3px rgba(0, 0, 0, 0.22);
-    margin: 15px 0px 0px 0px;
-    padding: 10px;
-    background-color: #eeeeee;
-    max-width: 500px;
-}
-@media (max-width: 550px) {
-    .caracter {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-    .character__info {
-        margin: 20px 0px 0px 0px;
-    }
-}
-
-//episode and location page 
-
-.episode__list__title {
-    color: #4d4959;
-    font-size: 16px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 2.6px;
-    border-bottom: 1px solid #4d4959;
-    margin: 20px 0px 20px 0px;
-    display: flex;
-    justify-content: flex-start;
-    max-width: 500px;
-}
-.episode__info {
-    display: flex;
-    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.25), 0 3px 3px rgba(0, 0, 0, 0.22);
-    justify-content: space-around;
-    align-items: center;
-    background-color: royalblue;
-    padding: 10px;
-    border-radius: 5px;
-    color: #ffffff;
-}
-.play_ico {
-    width: 50px;
-}
-
-
+};

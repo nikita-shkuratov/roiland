@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchCharacters, fetchEpisode } from '../../../../actions'
 import { useRouteMatch } from 'react-router-dom'
-import DataList from '../../../blocks/DataList/DataList'
 import Loader from '../../../blocks/Loader/Loader'
 import DataCard from '../../../blocks/DataCard/DataCard'
 
@@ -41,16 +40,7 @@ function EpisodePage () {
   return (
     <section className="content">
       <div className="content__block">
-        {loading ? <Loader /> : <DataCard episode={desiredEpisode} />}
-      </div>
-      <div className="episode__list">
-        <h1 className="episode__list__title">
-          List of characters that were in this episode
-        </h1>
-        <hr />
-        {loading
-          ? <Loader />
-          : <DataList character={arrayCharactersList} />}
+        {loading ? <Loader /> : <DataCard episode={[desiredEpisode, arrayCharactersList]} />}
       </div>
     </section>
   )

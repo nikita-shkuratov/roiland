@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchCharacters, fetchLocation } from '../../../../actions'
 import { useRouteMatch } from 'react-router-dom'
-import DataList from '../../../blocks/DataList/DataList'
 import Loader from '../../../blocks/Loader/Loader'
 import DataCard from '../../../blocks/DataCard/DataCard'
 
@@ -17,10 +16,7 @@ function LocationPage () {
   }, [dispatch, locationdId])
 
   const desiredLocation = useSelector(state => state.location.desiredLocation)
-  const charactersList = useSelector(
-    state => state.character.listCharacters,
-  )
-
+  const charactersList = useSelector(state => state.character.listCharacters)
   const loading = useSelector(state => state.episode.loading)
 
   const { residents } = desiredLocation
@@ -39,20 +35,7 @@ function LocationPage () {
 
   return (
     <section className="content">
-      <div className="content__block">
-        {loading
-          ? <Loader />
-          : <DataCard location={desiredLocation} />}
-      </div>
-      <div className="episode__list">
-        <h1 className="episode__list__title">
-          List of characters that were in this location
-        </h1>
-        <hr />
-        {loading
-          ? <Loader />
-          : <DataList character={arrayCharactersList} />}
-      </div>
+      {loading ? <Loader /> : <DataCard location={[desiredLocation, arrayCharactersList]} />}
     </section>
   )
 }
