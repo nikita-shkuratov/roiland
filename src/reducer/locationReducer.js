@@ -1,44 +1,36 @@
+import { initialState } from './initialState'
 import {
-  START_FETCH_LOCATIONS,
-  SUCCESS_FETCH_LOCATIONS,
-  START_FETCH_LOCATION,
-  SUCCESS_FETCH_LOCATION,
-  SET_PAGE_LOCATIONS,
+  LOCATIONS,
+  LOCATION,
 } from '../constants/actions'
-
-const initialState = {
-  listLocations: [],
-  desiredLocation: [],
-  pageLocations: 1,
-  loading: false,
-}
 
 export function locationReducer (state = initialState, action) {
   switch (action.type) {
-    case START_FETCH_LOCATIONS:
+    case LOCATIONS.START:
       return {
         ...state,
         loading: true,
-        listLocations: action.payload,
+        list: action.payload,
       }
-    case SUCCESS_FETCH_LOCATIONS:
+    case LOCATIONS.SUCCESS:
       return {
         ...state,
         loading: false,
       }
-    case START_FETCH_LOCATION:
+    case LOCATION.START:
       return {
         ...state,
         loading: true,
-        desiredLocation: action.payload,
+        id: action.payload.id,
+        data: action.payload.data,
       }
-    case SUCCESS_FETCH_LOCATION:
+    case LOCATION.SUCCESS:
       return {
         ...state,
         loading: false,
       }
-    case SET_PAGE_LOCATIONS:
-      return { ...state, pageLocations: action.payload }
+    case LOCATIONS.SET_PAGE:
+      return { ...state, page: action.payload }
     default:
       return state
   }

@@ -6,8 +6,8 @@ import DataList from '../DataList/DataList'
 
 function DataCard (props) {
   if (props.character) {
-    const [desiredCharacter, listEpisodes] = props.character
-    const { image, name, gender, species, origin, status } = desiredCharacter
+    const [character, list] = props.character
+    const { image, name, gender, species, origin, status } = character
 
     return (
       <div className="page__container">
@@ -27,13 +27,13 @@ function DataCard (props) {
           <h1 className="list__for__card__title">
             List of episodes with this character
           </h1>
-          <DataList episode={listEpisodes} />
+          <DataList episode={list} />
         </div>
       </div>
     )
   } else if (props.episode) {
-    const [desiredEpisode, listCharacters] = props.episode
-    const { name, episode, air_date } = desiredEpisode
+    const [id, list] = props.episode
+    const { name, episode, air_date: airDate } = id
 
     return (
       <div className="page__container">
@@ -44,20 +44,20 @@ function DataCard (props) {
           <div className="card__info">
             <p>{`Name : ${name}`}</p>
             <p>{`Episode : ${episode}`}</p>
-            <p>{`Air date : ${air_date}`}</p>
+            <p>{`Air date : ${airDate}`}</p>
           </div>
         </div>
         <div className="list__for__card">
           <h1 className="list__for__card__title">
             List of episodes with this character
           </h1>
-          <DataList character={listCharacters} />
+          <DataList character={list} />
         </div>
       </div>
     )
   } else if (props.location) {
-    const [desiredLocation, listCharacters] = props.location
-    const { name, type, dimension } = desiredLocation
+    const [id, list] = props.location
+    const { name, type, dimension } = id
 
     return (
       <div className="page__container">
@@ -73,7 +73,7 @@ function DataCard (props) {
         </div>
         <div className="list__for__card">
           <h1 className="list__for__card__title">List of episodes with this character</h1>
-          <DataList character={listCharacters} />
+          <DataList character={list} />
         </div>
       </div>
     )

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { fetchCharacters, fetchLocation } from '../../../../actions'
+import { fetchLocation } from '../../../../actions'
 import { useRouteMatch } from 'react-router-dom'
 import Loader from '../../../blocks/Loader/Loader'
 import DataCard from '../../../blocks/DataCard/DataCard'
@@ -15,19 +15,9 @@ function LocationPage () {
     dispatch(fetchLocation(locationdId))
   }, [dispatch, locationdId])
 
-  const desiredLocation = useSelector(state => state.location.desiredLocation)
-  const charactersList = useSelector(state => state.character.listCharacters)
-  const loading = useSelector(state => state.episode.loading)
-
-  const { residents } = desiredLocation
-
-  const allCharacters = residents
-    ? residents.map(item => parseInt(item.match(/\d+/))).join()
-    : ''
-
-  useEffect(() => {
-    residents && dispatch(fetchCharacters(allCharacters))
-  }, [dispatch, allCharacters, residents])
+  const desiredLocation = useSelector(state => state.location.id)
+  const charactersList = useSelector(state => state.location.data)
+  const loading = useSelector(state => state.location.loading)
 
   const arrayCharactersList = Array.isArray(charactersList)
     ? charactersList

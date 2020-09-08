@@ -9,23 +9,23 @@ function Pagination ({ data: { info } }) {
   const dispatch = useDispatch()
   const { pathname } = useLocation()
 
-  const currentPageCharacters = useSelector(
-    state => state.character.pageCharacters,
+  const currentPageCharacter = useSelector(
+    state => state.character.page,
   )
-  const currentPageEpisodes = useSelector(
-    state => state.episode.pageEpisodes,
+  const currentPageEpisode = useSelector(
+    state => state.episode.page,
   )
-  const currentPageLocations = useSelector(
-    state => state.location.pageLocations,
+  const currentPageLocation = useSelector(
+    state => state.location.page,
   )
 
   function definingPage () {
     if (pathname === PATH_CHARACTER) {
-      return { currentPage: currentPageCharacters }
+      return { currentPage: currentPageCharacter }
     } else if (pathname === PATH_EPISODE) {
-      return { currentPage: currentPageEpisodes }
+      return { currentPage: currentPageEpisode }
     } else if (pathname === PATH_LOCATION) {
-      return { currentPage: currentPageLocations }
+      return { currentPage: currentPageLocation }
     }
   }
 

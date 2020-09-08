@@ -1,44 +1,37 @@
-import {
-  START_FETCH_EPISODES,
-  SUCCESS_FETCH_EPISODES,
-  START_FETCH_EPISODE,
-  SUCCESS_FETCH_EPISODE,
-  SET_PAGE_EPISODES,
-} from '../constants/actions'
 
-const initialState = {
-  listEpisodes: [],
-  desiredEpisode: [],
-  pageEpisodes: 1,
-  loading: false,
-}
+import { initialState } from './initialState'
+import {
+  EPISODES,
+  EPISODE,
+} from '../constants/actions'
 
 export function episodeReducer (state = initialState, action) {
   switch (action.type) {
-    case START_FETCH_EPISODES:
+    case EPISODES.START:
       return {
         ...state,
         loading: true,
-        listEpisodes: action.payload,
+        list: action.payload,
       }
-    case SUCCESS_FETCH_EPISODES:
+    case EPISODES.SUCCESS:
       return {
         ...state,
         loading: false,
       }
-    case START_FETCH_EPISODE:
+    case EPISODE.START:
       return {
         ...state,
         loading: true,
-        desiredEpisode: action.payload,
+        id: action.payload.id,
+        data: action.payload.data,
       }
-    case SUCCESS_FETCH_EPISODE:
+    case EPISODE.SUCCESS:
       return {
         ...state,
         loading: false,
       }
-    case SET_PAGE_EPISODES:
-      return { ...state, pageEpisodes: action.payload }
+    case EPISODES.SET_PAGE:
+      return { ...state, page: action.payload }
     default:
       return state
   }

@@ -1,44 +1,36 @@
+import { initialState } from './initialState'
 import {
-  START_FETCH_CHARACTERS,
-  SUCCESS_FETCH_CHARACTERS,
-  START_FETCH_CHARACTER,
-  SUCCESS_FETCH_CHARACTER,
-  SET_PAGE_CHARACTERS,
+  CHARACTERS,
+  CHARACTER,
 } from '../constants/actions'
-
-const initialState = {
-  listCharacters: [],
-  desiredCharacter: [],
-  pageCharacters: 1,
-  loading: false,
-}
 
 export function characterReducer (state = initialState, action) {
   switch (action.type) {
-    case START_FETCH_CHARACTERS:
+    case CHARACTERS.START:
       return {
         ...state,
         loading: true,
-        listCharacters: action.payload,
+        list: action.payload,
       }
-    case SUCCESS_FETCH_CHARACTERS:
+    case CHARACTERS.SUCCESS:
       return {
         ...state,
         loading: false,
       }
-    case START_FETCH_CHARACTER:
+    case CHARACTER.START:
       return {
         ...state,
         loading: true,
-        desiredCharacter: action.payload,
+        id: action.payload.id,
+        data: action.payload.data,
       }
-    case SUCCESS_FETCH_CHARACTER:
+    case CHARACTER.SUCCESS:
       return {
         ...state,
         loading: false,
       }
-    case SET_PAGE_CHARACTERS:
-      return { ...state, pageCharacters: action.payload }
+    case CHARACTERS.SET_PAGE:
+      return { ...state, page: action.payload }
     default:
       return state
   }

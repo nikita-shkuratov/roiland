@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchEpisodes } from '../../../actions'
-import DataList from '../../blocks/DataList/DataList'
-import Loader from '../../blocks/Loader/Loader'
-import Pagination from '../../controls/Pagination/Pagination'
+import { fetchEpisodes } from '../../../../actions'
+import DataList from '../../../blocks/DataList/DataList'
+import Loader from '../../../blocks/Loader/Loader'
+import Pagination from '../../../controls/Pagination/Pagination'
 
-function Episodes () {
+function EpisodesList () {
   const dispatch = useDispatch()
-  const episodesList = useSelector(state => state.episode.listEpisodes)
-  const currentPage = useSelector(state => state.episode.pageEpisodes)
+  const episodesList = useSelector(state => state.episode.list)
+  const currentPage = useSelector(state => state.episode.page)
   const loading = useSelector(state => state.episode.loading)
 
   useEffect(() => {
@@ -28,4 +28,4 @@ function Episodes () {
   )
 }
 
-export default Episodes
+export default EpisodesList

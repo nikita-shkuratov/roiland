@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchLocations } from '../../../actions'
-import DataList from '../../blocks/DataList/DataList'
-import Loader from '../../blocks/Loader/Loader'
-import Pagination from '../../controls/Pagination/Pagination'
+import { fetchLocations } from '../../../../actions'
+import DataList from '../../../blocks/DataList/DataList'
+import Loader from '../../../blocks/Loader/Loader'
+import Pagination from '../../../controls/Pagination/Pagination'
 
-function Locations () {
+function LocationsList () {
   const dispatch = useDispatch()
-  const locationsList = useSelector(state => state.location.listLocations)
-  const currentPage = useSelector(state => state.location.pageLocations)
+  const locationsList = useSelector(state => state.location.list)
+  const currentPage = useSelector(state => state.location.page)
   const loading = useSelector(state => state.location.loading)
 
   useEffect(() => {
@@ -28,4 +28,4 @@ function Locations () {
   )
 }
 
-export default Locations
+export default LocationsList

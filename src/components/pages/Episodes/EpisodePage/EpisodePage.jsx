@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { fetchCharacters, fetchEpisode } from '../../../../actions'
+import { fetchEpisode } from '../../../../actions'
 import { useRouteMatch } from 'react-router-dom'
 import Loader from '../../../blocks/Loader/Loader'
 import DataCard from '../../../blocks/DataCard/DataCard'
@@ -15,23 +15,9 @@ function EpisodePage () {
     dispatch(fetchEpisode(episodId))
   }, [dispatch, episodId])
 
-  const desiredEpisode = useSelector(
-    state => state.episode.desiredEpisode,
-  )
-  const charactersList = useSelector(
-    state => state.character.listCharacters,
-  )
+  const desiredEpisode = useSelector(state => state.episode.id)
+  const charactersList = useSelector(state => state.episode.data)
   const loading = useSelector(state => state.episode.loading)
-
-  const { characters } = desiredEpisode
-
-  const allCharacters = characters
-    ? characters.map(item => parseInt(item.match(/\d+/))).join()
-    : ''
-
-  useEffect(() => {
-    characters && dispatch(fetchCharacters(allCharacters))
-  }, [dispatch, allCharacters, characters])
 
   const arrayCharactersList = Array.isArray(charactersList)
     ? charactersList

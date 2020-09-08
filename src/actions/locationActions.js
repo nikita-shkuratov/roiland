@@ -1,10 +1,8 @@
 import {
   URL_GET_LOCATIONS,
-  START_FETCH_LOCATIONS,
-  SUCCESS_FETCH_LOCATIONS,
-  START_FETCH_LOCATION,
-  SUCCESS_FETCH_LOCATION,
-  SET_PAGE_LOCATIONS,
+  LOCATIONS,
+  LOCATION,
+  URL_GET_CHARACTERS,
 } from '../constants'
 
 export function startFetchLocations (url) {
@@ -12,7 +10,7 @@ export function startFetchLocations (url) {
     try {
       const response = await fetch(`${URL_GET_LOCATIONS}${url}`)
       const json = await response.json()
-      dispatch({ type: START_FETCH_LOCATIONS, payload: json })
+      dispatch({ type: LOCATIONS.START, payload: json })
     } catch (error) {
       console.log(`server error - ${error}`)
     }
@@ -22,7 +20,7 @@ export function startFetchLocations (url) {
 export function fetchLocations (url) {
   return async dispatch => {
     await dispatch(startFetchLocations(url))
-    await dispatch({ type: SUCCESS_FETCH_LOCATIONS })
+    await dispatch({ type: LOCATIONS.SUCCESS })
   }
 }
 
@@ -31,7 +29,13 @@ export function startFetchLocation (id) {
     try {
       const response = await fetch(`${URL_GET_LOCATIONS}${id}`)
       const json = await response.json()
-      dispatch({ type: START_FETCH_LOCATION, payload: json })
+
+      const getAllCharacters = json.residents.map(item => parseInt(item.match(/\d+/))).join()
+
+      const res = await fetch(`${URL_GET_CHARACTERS}${getAllCharacters}`)
+      const data = await res.json()
+
+      dispatch({ type: LOCATION.START, payload: { id: json, data } })
     } catch (error) {
       console.log(`server error - ${error}`)
     }
@@ -41,10 +45,10 @@ export function startFetchLocation (id) {
 export function fetchLocation (id) {
   return async dispatch => {
     await dispatch(startFetchLocation(id))
-    await dispatch({ type: SUCCESS_FETCH_LOCATION })
+    await dispatch({ type: LOCATION.SUCCESS })
   }
 }
 
 export function setPageLocations (currentPage) {
-  return { type: SET_PAGE_LOCATIONS, payload: currentPage }
+  return { type: LOCATIONS.SET_PAGE, payload: currentPage }
 }

@@ -1,10 +1,8 @@
 import {
   URL_GET_CHARACTERS,
-  START_FETCH_CHARACTERS,
-  SUCCESS_FETCH_CHARACTERS,
-  START_FETCH_CHARACTER,
-  SUCCESS_FETCH_CHARACTER,
-  SET_PAGE_CHARACTERS,
+  CHARACTERS,
+  CHARACTER,
+  URL_GET_EPISODES,
 } from '../constants'
 
 export function startFetchCharacters (url) {
@@ -12,7 +10,7 @@ export function startFetchCharacters (url) {
     try {
       const response = await fetch(`${URL_GET_CHARACTERS}${url}`)
       const json = await response.json()
-      dispatch({ type: START_FETCH_CHARACTERS, payload: json })
+      dispatch({ type: CHARACTERS.START, payload: json })
     } catch (error) {
       console.log(`server error - ${error}`)
     }
@@ -22,7 +20,7 @@ export function startFetchCharacters (url) {
 export function fetchCharacters (url) {
   return async dispatch => {
     await dispatch(startFetchCharacters(url))
-    await dispatch({ type: SUCCESS_FETCH_CHARACTERS })
+    await dispatch({ type: CHARACTERS.SUCCESS })
   }
 }
 
@@ -31,7 +29,13 @@ export function startFetchCharacter (id) {
     try {
       const response = await fetch(`${URL_GET_CHARACTERS}${id}`)
       const json = await response.json()
-      dispatch({ type: START_FETCH_CHARACTER, payload: json })
+
+      const getAllEpisodes = json.episode.map(item => parseInt(item.match(/\d+/))).join()
+
+      const res = await fetch(`${URL_GET_EPISODES}${getAllEpisodes}`)
+      const data = await res.json()
+
+      dispatch({ type: CHARACTER.START, payload: { id: json, data } })
     } catch (error) {
       console.log(`server error - ${error}`)
     }
@@ -41,10 +45,10 @@ export function startFetchCharacter (id) {
 export function fetchCharacter (id) {
   return async dispatch => {
     await dispatch(startFetchCharacter(id))
-    await dispatch({ type: SUCCESS_FETCH_CHARACTER })
+    await dispatch({ type: CHARACTER.SUCCESS })
   }
 }
 
 export function setPageCharacters (currentPage) {
-  return { type: SET_PAGE_CHARACTERS, payload: currentPage }
+  return { type: CHARACTERS.SET_PAGE, payload: currentPage }
 }
