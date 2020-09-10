@@ -4,20 +4,15 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 import { setPageCharacters, setPageEpisodes, setPageLocations } from '../../../actions'
 import { PATH_LOCATION, PATH_EPISODE, PATH_CHARACTER } from '../../../constants'
+import propTypes from 'prop-types'
 
-function Pagination ({ data: { info } }) {
+function Pagination ({ data: { count } }) {
   const dispatch = useDispatch()
   const { pathname } = useLocation()
 
-  const currentPageCharacter = useSelector(
-    state => state.character.page,
-  )
-  const currentPageEpisode = useSelector(
-    state => state.episode.page,
-  )
-  const currentPageLocation = useSelector(
-    state => state.location.page,
-  )
+  const currentPageCharacter = useSelector(state => state.character.page)
+  const currentPageEpisode = useSelector(state => state.episode.page)
+  const currentPageLocation = useSelector(state => state.location.page)
 
   function definingPage () {
     if (pathname === PATH_CHARACTER) {
@@ -30,10 +25,9 @@ function Pagination ({ data: { info } }) {
   }
 
   const { currentPage } = definingPage()
-  const { count } = info || 200
 
   const { pagination } = createPagination({
-    numberOfArticles: count || 200,
+    numberOfArticles: count,
     articlesPerPage: 20,
     numberOfButtons: 8,
     currentPage,
@@ -82,6 +76,11 @@ function Pagination ({ data: { info } }) {
       </ul>
     </div>
   )
+}
+
+Pagination.propTypes = {
+  data: propTypes.object,
+  count: propTypes.number,
 }
 
 export default Pagination

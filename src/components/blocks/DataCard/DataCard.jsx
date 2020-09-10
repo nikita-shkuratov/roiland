@@ -1,6 +1,7 @@
 import React from 'react'
 import Loader from '../Loader/Loader'
 import DataList from '../DataList/DataList'
+import propTypes from 'prop-types'
 
 function DataCard (props) {
   if (!props.data) {
@@ -28,6 +29,13 @@ function DataCard (props) {
       </div>
     )
   }
+}
+
+DataCard.propTypes = {
+  image: propTypes.string,
+  params: propTypes.object,
+  list: propTypes.object,
+  title: propTypes.string,
 }
 
 export default DataCard

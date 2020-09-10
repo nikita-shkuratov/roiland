@@ -21,11 +21,9 @@ function CharactersList () {
   return (
     <section className="content">
       <div className="content__block">
-        <Pagination data={charactersList} />
-
         {loading
           ? <Loader />
-          : <DataList data={characterConfig} />}
+          : <><Pagination data={charactersList.info} /> <DataList data={characterConfig} /></>}
       </div>
     </section>
   )

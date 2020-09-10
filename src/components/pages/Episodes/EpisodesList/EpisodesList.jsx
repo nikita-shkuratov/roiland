@@ -21,11 +21,9 @@ function EpisodesList () {
   return (
     <section className="content">
       <div className="content__block">
-        <Pagination data={episodesList} />
-
         {loading
           ? <Loader />
-          : <DataList data={episodeConfig} />}
+          : <><Pagination data={episodesList.info} /> <DataList data={episodeConfig} /></>}
       </div>
     </section>
   )

@@ -21,11 +21,9 @@ function LocationsList () {
   return (
     <section className="content">
       <div className="content__block">
-        <Pagination data={locationsList} />
-
         {loading
           ? <Loader />
-          : <DataList data={locationConfig} />}
+          : <><Pagination data={locationsList.info} /> <DataList data={locationConfig} /></>}
       </div>
     </section>
   )

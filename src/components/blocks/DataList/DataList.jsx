@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import propTypes from 'prop-types'
 
 function DataList (props) {
   const { list, path, title } = props.data
@@ -33,6 +34,13 @@ function DataList (props) {
       </div>
     </div>
   )
+}
+
+DataList.propTypes = {
+  data: propTypes.object,
+  list: propTypes.array,
+  path: propTypes.string,
+  title: propTypes.array,
 }
 
 export default DataList
