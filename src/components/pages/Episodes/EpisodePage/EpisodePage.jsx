@@ -4,6 +4,8 @@ import { fetchEpisode } from '../../../../actions'
 import { useRouteMatch } from 'react-router-dom'
 import Loader from '../../../blocks/Loader/Loader'
 import DataCard from '../../../blocks/DataCard/DataCard'
+import { configEpisodePage } from '../configCreator/configCreatorForEpisode'
+import { configCharacterList } from '../../Characters/configCreator/configCreatorForCharacter'
 
 function EpisodePage () {
   const dispatch = useDispatch()
@@ -23,10 +25,13 @@ function EpisodePage () {
     ? charactersList
     : [charactersList]
 
+  const createConfigCharactersList = configCharacterList(arrayCharactersList)
+  const episodeConfig = configEpisodePage(desiredEpisode, createConfigCharactersList)
+
   return (
     <section className="content">
       <div className="content__block">
-        {loading ? <Loader /> : <DataCard episode={[desiredEpisode, arrayCharactersList]} />}
+        {loading ? <Loader /> : <DataCard data={episodeConfig} />}
       </div>
     </section>
   )

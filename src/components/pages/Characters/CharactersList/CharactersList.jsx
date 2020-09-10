@@ -4,17 +4,19 @@ import { fetchCharacters } from '../../../../actions'
 import DataList from '../../../blocks/DataList/DataList'
 import Loader from '../../../blocks/Loader/Loader'
 import Pagination from '../../../controls/Pagination/Pagination'
+import { configCharacterList } from '../configCreator/configCreatorForCharacter'
 
 function CharactersList () {
   const dispatch = useDispatch()
   const charactersList = useSelector(state => state.character.list)
   const currentPage = useSelector(state => state.character.page)
-  const loading = useSelector(state => state.character.loading)
+  const loading = useSelector(state => state.character.loading) || charactersList.length === 0
 
   useEffect(() => {
-    console.log('render')
     dispatch(fetchCharacters(`?page=${currentPage}`))
   }, [dispatch, currentPage])
+
+  const characterConfig = configCharacterList(charactersList.results)
 
   return (
     <section className="content">
@@ -23,7 +25,7 @@ function CharactersList () {
 
         {loading
           ? <Loader />
-          : <DataList character={charactersList.results} />}
+          : <DataList data={characterConfig} />}
       </div>
     </section>
   )

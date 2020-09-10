@@ -4,6 +4,8 @@ import { fetchLocation } from '../../../../actions'
 import { useRouteMatch } from 'react-router-dom'
 import Loader from '../../../blocks/Loader/Loader'
 import DataCard from '../../../blocks/DataCard/DataCard'
+import { configLocationPage } from '../configCreator/configCreatorForLocation'
+import { configCharacterList } from '../../Characters/configCreator/configCreatorForCharacter'
 
 function LocationPage () {
   const dispatch = useDispatch()
@@ -23,9 +25,14 @@ function LocationPage () {
     ? charactersList
     : [charactersList]
 
+  const createConfigCharactersList = configCharacterList(arrayCharactersList)
+  const locationConfig = configLocationPage(desiredLocation, createConfigCharactersList)
+
   return (
     <section className="content">
-      {loading ? <Loader /> : <DataCard location={[desiredLocation, arrayCharactersList]} />}
+      <div className="content__block">
+        {loading ? <Loader /> : <DataCard data={locationConfig} />}
+      </div>
     </section>
   )
 }
