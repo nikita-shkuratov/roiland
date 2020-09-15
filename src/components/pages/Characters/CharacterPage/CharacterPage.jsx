@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { fetchCharacter } from '../../../../actions'
 import { useRouteMatch } from 'react-router-dom'
+import { fetchCharacter } from '../../../../actions'
 import Loader from '../../../blocks/Loader/Loader'
 import DataCard from '../../../blocks/DataCard/DataCard'
-import { configCharacterPage } from '../configCreator/configCreatorForCharacter'
-import { configEpisodeList } from '../../Episodes/configCreator/configCreatorForEpisode'
+import { configCharacterPage } from '../../../../helpers/configCreator/configCharacter'
+import { configEpisodeList } from '../../../../helpers/configCreator/configEpisode'
+import { Content, ContentBlock } from '../../styles'
 
 function CharacterPage () {
   const dispatch = useDispatch()
@@ -29,11 +30,11 @@ function CharacterPage () {
   const characterConfig = configCharacterPage(desiredCharacter, createConfigEpisodesList)
 
   return (
-    <section className="content">
-      <div className="content__block">
+    <Content>
+      <ContentBlock>
         {loading ? <Loader /> : <DataCard data={characterConfig} />}
-      </div>
-    </section>
+      </ContentBlock>
+    </Content>
   )
 }
 

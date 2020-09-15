@@ -1,4 +1,4 @@
-import { PATH_CHARACTER } from '../../../../constants'
+import { PATH_CHARACTER } from '../../constants'
 
 export function configCharacterList (list) {
   return (

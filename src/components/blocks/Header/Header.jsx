@@ -1,50 +1,42 @@
 import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
-import {
-  PATH_CHARACTER,
-  PATH_EPISODE,
-  PATH_LOCATION,
-} from '../../../constants'
+import { PATH_CHARACTER, PATH_EPISODE, PATH_LOCATION } from '../../../constants'
+import { HeaderContainer, MenuBurger, MenuBody, MenuList } from './styles'
 
 function Header () {
   const [menu, setMenu] = useState(false)
 
   return (
-    <header className="header">
-      <div className="header__row">
-        <nav className="header__menu menu">
-          <div
-            className={
-              menu ? 'menu__icon icon-menu active' : 'menu__icon icon-menu'
-            }
-            onClick={() => setMenu(prev => !prev)}
-          >
+    <HeaderContainer>
+      <div>
+        <nav>
+          <MenuBurger active={menu} onClick={() => setMenu(prev => !prev)}>
             <span />
             <span />
             <span />
-          </div>
-          <div className={menu ? 'menu__body active' : 'menu__body'}>
-            <ul className="menu__list">
+          </MenuBurger>
+          <MenuBody active={menu}>
+            <MenuList>
               <li>
-                <NavLink to={PATH_CHARACTER} className="menu__link">
+                <NavLink to={PATH_CHARACTER}>
                   Characters
                 </NavLink>
               </li>
               <li>
-                <NavLink to={PATH_EPISODE} className="menu__link">
+                <NavLink to={PATH_EPISODE}>
                   Episodes
                 </NavLink>
               </li>
               <li>
-                <NavLink to={PATH_LOCATION} className="menu__link">
+                <NavLink to={PATH_LOCATION}>
                   Locations
                 </NavLink>
               </li>
-            </ul>
-          </div>
+            </MenuList>
+          </MenuBody>
         </nav>
       </div>
-    </header>
+    </HeaderContainer>
   )
 }
 

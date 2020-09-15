@@ -4,7 +4,8 @@ import { fetchEpisodes } from '../../../../actions'
 import DataList from '../../../blocks/DataList/DataList'
 import Loader from '../../../blocks/Loader/Loader'
 import Pagination from '../../../controls/Pagination/Pagination'
-import { configEpisodeList } from '../configCreator/configCreatorForEpisode'
+import { configEpisodeList } from '../../../../helpers/configCreator/configEpisode'
+import { Content, ContentBlock } from '../../styles'
 
 function EpisodesList () {
   const dispatch = useDispatch()
@@ -19,13 +20,17 @@ function EpisodesList () {
   const episodeConfig = configEpisodeList(episodesList.results)
 
   return (
-    <section className="content">
-      <div className="content__block">
+    <Content>
+      <ContentBlock>
         {loading
           ? <Loader />
-          : <><Pagination data={episodesList.info} /> <DataList data={episodeConfig} /></>}
-      </div>
-    </section>
+          : (
+            <>
+              <Pagination data={episodesList.info} />
+              <DataList data={episodeConfig} />
+            </>)}
+      </ContentBlock>
+    </Content>
   )
 }
 

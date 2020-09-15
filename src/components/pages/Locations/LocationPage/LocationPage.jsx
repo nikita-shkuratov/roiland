@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { fetchLocation } from '../../../../actions'
 import { useRouteMatch } from 'react-router-dom'
+import { fetchLocation } from '../../../../actions'
 import Loader from '../../../blocks/Loader/Loader'
 import DataCard from '../../../blocks/DataCard/DataCard'
-import { configLocationPage } from '../configCreator/configCreatorForLocation'
-import { configCharacterList } from '../../Characters/configCreator/configCreatorForCharacter'
+import { configLocationPage } from '../../../../helpers/configCreator/configLocation'
+import { configCharacterList } from '../../../../helpers/configCreator/configCharacter'
+import { Content, ContentBlock } from '../../styles'
 
 function LocationPage () {
   const dispatch = useDispatch()
@@ -29,11 +30,11 @@ function LocationPage () {
   const locationConfig = configLocationPage(desiredLocation, createConfigCharactersList)
 
   return (
-    <section className="content">
-      <div className="content__block">
+    <Content>
+      <ContentBlock>
         {loading ? <Loader /> : <DataCard data={locationConfig} />}
-      </div>
-    </section>
+      </ContentBlock>
+    </Content>
   )
 }
 

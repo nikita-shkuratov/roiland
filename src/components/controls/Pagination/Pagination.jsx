@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 import { setPageCharacters, setPageEpisodes, setPageLocations } from '../../../actions'
 import { PATH_LOCATION, PATH_EPISODE, PATH_CHARACTER } from '../../../constants'
+import { PaginationContainer, PaginationList } from './styles'
 import propTypes from 'prop-types'
 
 function Pagination ({ data: { count } }) {
@@ -44,11 +45,13 @@ function Pagination ({ data: { count } }) {
   }
 
   return (
-    <div className="pagination">
-      <ul className="pagination__list">
+    <PaginationContainer>
+      <PaginationList>
         <li
           className={`${
-            pagination[0] === currentPage ? 'disabled __show' : 'false __show'
+            pagination[0] === currentPage
+             ? 'disabled show'
+             : 'false show'
           }`}
           onClick={handleClick(currentPage - 1)}
         >
@@ -66,15 +69,15 @@ function Pagination ({ data: { count } }) {
         <li
           className={`${
             pagination.reverse()[0] === currentPage
-              ? 'disabled __show'
-              : 'false __show'
+              ? 'disabled show'
+              : 'false show'
           }`}
           onClick={handleClick(currentPage + 1)}
         >
           Next
         </li>
-      </ul>
-    </div>
+      </PaginationList>
+    </PaginationContainer>
   )
 }
 

@@ -1,6 +1,6 @@
-import { PATH_LOCATION } from '../../../../constants'
-import locationIco from '../../../../style/img/location-ico.png'
-import locationImage from '../../../../style/img/card-loc.jpg'
+import { PATH_LOCATION } from '../../constants'
+import locationIco from '../../style/img/location-ico.png'
+import locationImage from '../../style/img/card-loc.jpg'
 
 export function configLocationList (list) {
   return (

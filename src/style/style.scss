@@ -1,5 +1,5 @@
 //<МИКСИНЫ>==============================================================================================
-@import "mixins.scss";
+//@import "mixins.scss";
 
 //<ШРИФТЫ>===============================================================================================
 @import url("https://fonts.googleapis.com/css?family=Lato:400,400i,700&display=swap");
@@ -14,40 +14,4 @@ $minwidth: 320px;
 @import "null.scss";
 
 //<ОБОЛОЧКА>==============================================================================================
-.wrapper {
-	min-height: 100vh;
-	display: flex;
-	flex-direction: column;
-}
 
-.page {
-	min-height: 100vh;
-	display: flex;
-	padding: 20px 0;
-}
-
-.content {
-	flex: 1 1 auto;
-	width: 100%;
-	max-width: 800px;
-	margin: 0 auto;
-	text-align: center;
-	display: flex;
-	flex-direction: column;
-	padding: 50px;
-}
-
-.content__block {
-
-	justify-content: center;
-	align-items: center;
-}
-
-//</ПОДКЛЮЧЕНИЕ ФАЙЛОВ СТИЛЕЙ СТРАНИЦ И ЭЛЕМЕНТОВ>========================================================
-@import "../components/blocks/Header/Header.scss";
-@import "../components/blocks/DataCard/DataCard.scss";
-@import "../components/blocks/Loader/Loader.scss";
-@import "../components/controls/Pagination/Pagination.scss";
-@import "../components/blocks/DataList/DataList.scss";
-
-//<ОСНОВНОЙ БЛОК>========================================================================================

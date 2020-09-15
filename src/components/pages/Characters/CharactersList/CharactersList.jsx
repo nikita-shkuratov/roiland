@@ -4,7 +4,8 @@ import { fetchCharacters } from '../../../../actions'
 import DataList from '../../../blocks/DataList/DataList'
 import Loader from '../../../blocks/Loader/Loader'
 import Pagination from '../../../controls/Pagination/Pagination'
-import { configCharacterList } from '../configCreator/configCreatorForCharacter'
+import { configCharacterList } from '../../../../helpers/configCreator/configCharacter'
+import { Content, ContentBlock } from '../../styles'
 
 function CharactersList () {
   const dispatch = useDispatch()
@@ -19,13 +20,17 @@ function CharactersList () {
   const characterConfig = configCharacterList(charactersList.results)
 
   return (
-    <section className="content">
-      <div className="content__block">
+    <Content>
+      <ContentBlock>
         {loading
           ? <Loader />
-          : <><Pagination data={charactersList.info} /> <DataList data={characterConfig} /></>}
-      </div>
-    </section>
+          : (
+            <>
+              <Pagination data={charactersList.info} />
+              <DataList data={characterConfig} />
+            </>)}
+      </ContentBlock>
+    </Content>
   )
 }
 

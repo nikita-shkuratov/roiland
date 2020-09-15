@@ -1,13 +1,14 @@
 import React from 'react'
+import { LoaderRoller } from './styles'
 
 function Loader () {
   return (
-    <div className="lds-roller">
+    <LoaderRoller>
       <div />
       <div />
       <div />
       <div />
-    </div>
+    </LoaderRoller>
   )
 }
 

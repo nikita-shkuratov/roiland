@@ -4,7 +4,8 @@ import { fetchLocations } from '../../../../actions'
 import DataList from '../../../blocks/DataList/DataList'
 import Loader from '../../../blocks/Loader/Loader'
 import Pagination from '../../../controls/Pagination/Pagination'
-import { configLocationList } from '../configCreator/configCreatorForLocation'
+import { configLocationList } from '../../../../helpers/configCreator/configLocation'
+import { Content, ContentBlock } from '../../styles'
 
 function LocationsList () {
   const dispatch = useDispatch()
@@ -19,13 +20,17 @@ function LocationsList () {
   const locationConfig = configLocationList(locationsList.results)
 
   return (
-    <section className="content">
-      <div className="content__block">
+    <Content>
+      <ContentBlock>
         {loading
           ? <Loader />
-          : <><Pagination data={locationsList.info} /> <DataList data={locationConfig} /></>}
-      </div>
-    </section>
+          : (
+            <>
+              <Pagination data={locationsList.info} />
+              <DataList data={locationConfig} />
+            </>)}
+      </ContentBlock>
+    </Content>
   )
 }
 
