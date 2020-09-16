@@ -1,6 +1,6 @@
 import { PATH_EPISODE } from '../../constants'
-import episodeIco from '../../style/img/play-ico.png'
-import episodeImage from '../../style/img/card-epis.jpg'
+import episodeIco from '../../img/play-ico.png'
+import episodeImage from '../../img/card-epis.jpg'
 
 export function configEpisodeList (list) {
   return (

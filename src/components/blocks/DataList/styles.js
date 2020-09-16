@@ -35,7 +35,6 @@ export const TableHeaderRow = styled.div`
     }
   }
 `
-
 export const TableBodyRow = styled.div`
   display: flex;
   flex-direction: row;

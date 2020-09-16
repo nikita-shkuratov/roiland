@@ -1,8 +1,8 @@
 import React from 'react'
+import propTypes from 'prop-types'
 import Loader from '../Loader/Loader'
 import DataList from '../DataList/DataList'
-import propTypes from 'prop-types'
-import { PageContainer, Card, List } from './styles'
+import { PageContainer, Card, List, ImgBox, InfoBox } from './styles'
 
 function DataCard (props) {
   if (!props.data) {
@@ -14,14 +14,14 @@ function DataCard (props) {
     return (
       <PageContainer>
         <Card>
-          <div>
+          <ImgBox>
             <img src={image} alt="" />
-          </div>
-          <div>
+          </ImgBox>
+          <InfoBox>
             {Object.keys(params).map(name => (
               <p key={name}>{`${name} : ${params[name]}`}</p>
             ))}
-          </div>
+          </InfoBox>
         </Card>
         <List>
           <h1>{title}</h1>

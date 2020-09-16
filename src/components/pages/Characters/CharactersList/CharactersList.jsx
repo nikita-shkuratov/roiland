@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchCharacters } from '../../../../actions'
 import DataList from '../../../blocks/DataList/DataList'
 import Loader from '../../../blocks/Loader/Loader'
 import Pagination from '../../../controls/Pagination/Pagination'
-import { configCharacterList } from '../../../../helpers/configCreator/configCharacter'
 import { Content, ContentBlock } from '../../styles'
+import { configCharacterList } from '../../../../helpers/configCreator/configCharacter'
+import { fetchCharacters } from '../../../../actions'
 
 function CharactersList () {
   const dispatch = useDispatch()

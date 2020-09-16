@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useRouteMatch } from 'react-router-dom'
-import { fetchEpisode } from '../../../../actions'
 import Loader from '../../../blocks/Loader/Loader'
 import DataCard from '../../../blocks/DataCard/DataCard'
+import { Content, ContentBlock } from '../../styles'
 import { configEpisodePage } from '../../../../helpers/configCreator/configEpisode'
 import { configCharacterList } from '../../../../helpers/configCreator/configCharacter'
-import { Content, ContentBlock } from '../../styles'
+import { fetchEpisode } from '../../../../actions'
 
 function EpisodePage () {
   const dispatch = useDispatch()

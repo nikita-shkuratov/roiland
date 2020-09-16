@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchLocations } from '../../../../actions'
 import DataList from '../../../blocks/DataList/DataList'
 import Loader from '../../../blocks/Loader/Loader'
 import Pagination from '../../../controls/Pagination/Pagination'
-import { configLocationList } from '../../../../helpers/configCreator/configLocation'
 import { Content, ContentBlock } from '../../styles'
+import { configLocationList } from '../../../../helpers/configCreator/configLocation'
+import { fetchLocations } from '../../../../actions'
 
 function LocationsList () {
   const dispatch = useDispatch()

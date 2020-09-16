@@ -9,22 +9,22 @@ export const Card = styled.div`
   display: flex;
   padding-top: 20px;
   border-top: 1px solid #4d4959;
-  & div:nth-child(1) {
-    img {
-      width: 200px;
-    }
+`
+export const ImgBox = styled.div`
+  img {
+    width: 200px;
   }
-  & div:nth-child(2) {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    margin: 0px 0px 0px 20px;
-    color: #4d4959;
-    font-size: 16px;
-    p {
-      margin-bottom: 10px;
-    }
+`
+export const InfoBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin: 0px 0px 0px 20px;
+  color: #4d4959;
+  font-size: 16px;
+  p {
+    margin-bottom: 10px;
   }
 `
 

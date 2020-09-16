@@ -1,42 +1,46 @@
-import React, { useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import React, { useState, useCallback } from 'react'
+import {
+  HeaderLayout,
+  HeaderContainer,
+  MenuBurger,
+  MenuBody,
+  MenuList,
+  Element,
+  Link,
+  Span,
+} from './styles'
 import { PATH_CHARACTER, PATH_EPISODE, PATH_LOCATION } from '../../../constants'
-import { HeaderContainer, MenuBurger, MenuBody, MenuList } from './styles'
 
 function Header () {
   const [menu, setMenu] = useState(false)
 
+  const menuItems = [
+    { title: 'Characters', path: PATH_CHARACTER },
+    { title: 'Episodes', path: PATH_EPISODE },
+    { title: 'Locations', path: PATH_LOCATION },
+  ]
+
   return (
-    <HeaderContainer>
-      <div>
+    <HeaderLayout>
+      <HeaderContainer>
         <nav>
-          <MenuBurger active={menu} onClick={() => setMenu(prev => !prev)}>
-            <span />
-            <span />
-            <span />
+          <MenuBurger active={menu} onClick={useCallback(() => setMenu(prev => !prev), [])}>
+            <Span />
+            <Span />
+            <Span />
           </MenuBurger>
           <MenuBody active={menu}>
             <MenuList>
-              <li>
-                <NavLink to={PATH_CHARACTER}>
-                  Characters
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to={PATH_EPISODE}>
-                  Episodes
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to={PATH_LOCATION}>
-                  Locations
-                </NavLink>
-              </li>
+              {menuItems.map((item, index) => (
+                <Element key={index}>
+                  <Link as={Link} to={item.path}>{item.title}</Link>
+                </Element>
+              ))}
             </MenuList>
           </MenuBody>
         </nav>
-      </div>
-    </HeaderContainer>
+      </HeaderContainer>
+    </HeaderLayout>
   )
 }
 

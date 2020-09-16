@@ -2,10 +2,10 @@ import React from 'react'
 import { createPagination } from './createPagination'
 import { useSelector, useDispatch } from 'react-redux'
 import { useLocation } from 'react-router-dom'
+import propTypes from 'prop-types'
+import { PaginationContainer, PaginationList, LiPrev, LiNumbers, LiNext } from './styles'
 import { setPageCharacters, setPageEpisodes, setPageLocations } from '../../../actions'
 import { PATH_LOCATION, PATH_EPISODE, PATH_CHARACTER } from '../../../constants'
-import { PaginationContainer, PaginationList } from './styles'
-import propTypes from 'prop-types'
 
 function Pagination ({ data: { count } }) {
   const dispatch = useDispatch()
@@ -47,35 +47,27 @@ function Pagination ({ data: { count } }) {
   return (
     <PaginationContainer>
       <PaginationList>
-        <li
-          className={`${
-            pagination[0] === currentPage
-             ? 'disabled show'
-             : 'false show'
-          }`}
+        <LiPrev
+          disabled={pagination[0] === currentPage}
           onClick={handleClick(currentPage - 1)}
         >
           Prev
-        </li>
+        </LiPrev>
         {pagination.map((page, index) => (
-          <li
+          <LiNumbers
             key={index}
-            className={`${currentPage === page && 'active'}`}
+            active={currentPage === page}
             onClick={handleClick(page)}
           >
             {page}
-          </li>
+          </LiNumbers>
         ))}
-        <li
-          className={`${
-            pagination.reverse()[0] === currentPage
-              ? 'disabled show'
-              : 'false show'
-          }`}
+        <LiNext
+          disabled={pagination.reverse()[0] === currentPage}
           onClick={handleClick(currentPage + 1)}
         >
           Next
-        </li>
+        </LiNext>
       </PaginationList>
     </PaginationContainer>
   )
