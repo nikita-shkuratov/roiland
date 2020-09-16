@@ -20,11 +20,13 @@ function Header () {
     { title: 'Locations', path: PATH_LOCATION },
   ]
 
+  const handleClick = useCallback(() => setMenu(prev => !prev), [])
+
   return (
     <HeaderLayout>
       <HeaderContainer>
         <nav>
-          <MenuBurger active={menu} onClick={useCallback(() => setMenu(prev => !prev), [])}>
+          <MenuBurger active={menu} onClick={handleClick}>
             <Span />
             <Span />
             <Span />

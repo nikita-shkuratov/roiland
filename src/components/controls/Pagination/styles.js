@@ -28,15 +28,15 @@ const Li = styled.li`
 `
 
 export const LiPrev = styled(Li)`
-  background: ${props => (props.disabled ? '#fbeaff' : '#3e207c')};
-  pointer-events: ${props => (props.disabled ? 'none' : 'auto')};
+  background: ${({ disabled }) => (disabled ? '#fbeaff' : '#3e207c')};
+  pointer-events: ${({ disabled }) => (disabled ? 'none' : 'auto')};
 `
 
 export const LiNumbers = styled(Li)`
-  background-color: ${props => (props.active ? '#ff6f91' : '#845ec2')};
-  cursor: ${props => (props.active ? 'default' : 'pointer')};
+  background-color: ${({ active }) => (active ? '#ff6f91' : '#845ec2')};
+  cursor: ${({ active }) => (active ? 'default' : 'pointer')};
   :hover{
-    background: ${props => (props.active && '#ff6f91')};
+    background: ${({ active }) => (active && '#ff6f91')};
   }
   @media (max-width: 700px) {
     display:none;

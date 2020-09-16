@@ -28,8 +28,7 @@ export const MenuBody = styled.div`
     background-color: #4d4959;
     padding: 150px 0px 20px 0px;
     transition: ease 0.3s all;
-    transform: ${props =>
-      props.active
+    transform: ${({ active }) => active
         ? 'translate3d(0px, 0px, 0px);'
         : 'translate3d(0, -100%, 0);'};
   }
@@ -133,8 +132,7 @@ export const MenuBurger = styled.div`
     cursor: pointer;
     z-index: 5;
     ${Span} {
-      ${props =>
-        props.active && `
+      ${({ active }) => active && `
           transform: scale(0);
           background-color: #fff;
           &:first-child {
