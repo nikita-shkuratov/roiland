@@ -10,7 +10,6 @@ export const PaginationList = styled.ul`
   padding: 0px;
   display: flex;
 `
-
 const Li = styled.li`
   background: #845ec2;
   padding: 10px 15px;
@@ -26,23 +25,21 @@ const Li = styled.li`
     background: #d65db1;
   }
 `
-
 export const LiPrev = styled(Li)`
-  background: ${({ disabled }) => (disabled ? '#fbeaff' : '#3e207c')};
+  background: #3e207c;
   pointer-events: ${({ disabled }) => (disabled ? 'none' : 'auto')};
+  display: ${({ disabled }) => (disabled ? 'none' : 'inline')};
 `
-
 export const LiNumbers = styled(Li)`
   background-color: ${({ active }) => (active ? '#ff6f91' : '#845ec2')};
   cursor: ${({ active }) => (active ? 'default' : 'pointer')};
-  :hover{
-    background: ${({ active }) => (active && '#ff6f91')};
+  :hover {
+    background: ${({ active }) => active && '#ff6f91'};
   }
   @media (max-width: 700px) {
-    display:none;
+    display: none;
   }
 `
-
 export const LiNext = styled(LiPrev)`
   margin-right: 0px;
 `

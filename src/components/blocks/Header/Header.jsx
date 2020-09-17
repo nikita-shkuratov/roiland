@@ -35,7 +35,7 @@ function Header () {
             <MenuList>
               {menuItems.map((item, index) => (
                 <Element key={index}>
-                  <Link as={Link} to={item.path}>{item.title}</Link>
+                  <Link to={item.path}>{item.title}</Link>
                 </Element>
               ))}
             </MenuList>

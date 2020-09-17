@@ -1,9 +1,9 @@
 import React from 'react'
-import { createPagination } from './createPagination'
 import { useSelector, useDispatch } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 import propTypes from 'prop-types'
 import { PaginationContainer, PaginationList, LiPrev, LiNumbers, LiNext } from './styles'
+import { createPagination } from '../../../helpers/createPagination/createPagination'
 import { setPageCharacters, setPageEpisodes, setPageLocations } from '../../../actions'
 import { PATH_LOCATION, PATH_EPISODE, PATH_CHARACTER } from '../../../constants'
 

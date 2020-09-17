@@ -1,19 +1,25 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import propTypes from 'prop-types'
-import { Table, TableHeaderRow, TableBodyRow } from './styles'
+import {
+  Table,
+  TableHeaderRow,
+  TableBodyRow,
+  HeaderTitles,
+  Image,
+  BodyItems,
+} from './styles'
 
 function DataList (props) {
   const { list, path, title } = props.data
-
   return (
     <Table>
       <div>
         <TableHeaderRow>
           {title.map(item => (
-            <div key={item}>
+            <HeaderTitles key={item}>
               <p>{`${item}`}</p>
-            </div>
+            </HeaderTitles>
           ))}
         </TableHeaderRow>
       </div>
@@ -21,13 +27,13 @@ function DataList (props) {
         {list.map((item, index) => (
           <Link to={`${path}${item.id}`} key={index}>
             <TableBodyRow key={index}>
-              <div>
-                <img src={item.image} alt="" />
-              </div>
+              <BodyItems>
+                <Image src={item.image} alt="" />
+              </BodyItems>
               {Object.values(item.params).map((name, index) => (
-                <div key={index}>
+                <BodyItems key={index}>
                   <p>{`${name}`}</p>
-                </div>
+                </BodyItems>
               ))}
             </TableBodyRow>
           </Link>

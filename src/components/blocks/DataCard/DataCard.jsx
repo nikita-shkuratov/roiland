@@ -10,7 +10,6 @@ function DataCard (props) {
   }
   if (props.data) {
     const { image, params, list, title } = props.data
-
     return (
       <PageContainer>
         <Card>

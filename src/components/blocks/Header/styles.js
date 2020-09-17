@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { NavLink } from 'react-router-dom'
+import burgerBg from '../../../img/burger-bg.jpg'
 
 export const HeaderLayout = styled.header`
   position: absolute;
@@ -17,7 +18,6 @@ export const HeaderContainer = styled.div`
     top: 15px;
   }
 `
-
 export const MenuBody = styled.div`
   @media (max-width: 767px) {
     position: fixed;
@@ -25,15 +25,14 @@ export const MenuBody = styled.div`
     width: 100%;
     top: 0;
     left: 0;
-    background-color: #4d4959;
+    background: url(${burgerBg}) center fixed;
+    background-size: cover;
     padding: 150px 0px 20px 0px;
     transition: ease 0.3s all;
-    transform: ${({ active }) => active
-        ? 'translate3d(0px, 0px, 0px);'
-        : 'translate3d(0, -100%, 0);'};
+    transform: ${({ active }) =>
+      active ? 'translate3d(0px, 0px, 0px);' : 'translate3d(0, -100%, 0);'};
   }
 `
-
 export const MenuList = styled.ul`
   display: flex;
   @media (max-width: 767px) {
@@ -42,10 +41,9 @@ export const MenuList = styled.ul`
     align-items: center;
   }
 `
-
 export const Link = styled(NavLink)`
-  color: #807d8a;
-  font-size: 16px;
+  color: #ffffff;
+  font-size: 18px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 2.6px;
@@ -53,14 +51,15 @@ export const Link = styled(NavLink)`
     color: rgb(190, 188, 188);
   }
   &.active {
-    color: #000000;
+    color: #ff6f91;
+    font-weight: 700;
   }
   @media (max-width: 767px) {
     color: #fff;
-    font-size: 20px;
+    font-size: 30px;
+    text-shadow: 2px 2px 1px #000000;
   }
 `
-
 export const Element = styled.li`
   position: relative;
   padding: 0px 45px;
@@ -110,7 +109,7 @@ export const Span = styled.span`
   position: absolute;
   width: 100%;
   height: 2px;
-  background-color: #4d4959;
+  background-color: #ffffff;
   &:first-child {
     top: 0px;
   }
@@ -119,7 +118,6 @@ export const Span = styled.span`
     bottom: 0px;
   }
 `
-
 export const MenuBurger = styled.div`
   display: none;
   @media (max-width: 767px) {
@@ -132,8 +130,9 @@ export const MenuBurger = styled.div`
     cursor: pointer;
     z-index: 5;
     ${Span} {
-      ${({ active }) => active && `
-          transform: scale(0);
+      ${({ active }) =>
+        active &&
+        `transform: scale(0);
           background-color: #fff;
           &:first-child {
             transform: rotate(-45deg);

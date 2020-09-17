@@ -1,4 +1,5 @@
 import styled, { createGlobalStyle } from 'styled-components'
+import mainBg from './img/main-bg.jpg'
 
 export const GlobalStyle = createGlobalStyle`
   * {
@@ -73,10 +74,11 @@ export const GlobalStyle = createGlobalStyle`
     font-size: inherit;
   }
 `
-
 export const Layout = styled.div`
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   padding: 20px 0;
+  background:url(${mainBg}) center fixed;
+  background-size:cover;
 `
